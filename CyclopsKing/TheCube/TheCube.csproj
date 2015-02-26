@@ -42,6 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Challenge.cs" />
+    <Compile Include="IChallenge.cs" />
+    <Compile Include="IMenu.cs" />
+    <Compile Include="IPlayer.cs" />
+    <Compile Include="IScore.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Score.cs" />
