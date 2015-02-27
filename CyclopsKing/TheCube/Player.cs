@@ -1,97 +1,118 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace Player
+public class Player
 {
-    class Program
+    private string name;
+    private int credits;
+    private Category categoryType;
+    private int bonusScore;
+    private Coordinates coordinates;
+    private Category category;
+    //private Hashtable passedMoves;
+
+    public Player(string playerName, int playerCredits, Category categoryChoise, int playerBonusScore, Coordinates playerCoordinates)
     {
-        static void Main(string[] args)
+        Name = playerName;
+        Credits = playerCredits;
+        CategoryType = categoryChoise;
+        BonusScore = playerBonusScore;
+        coordinates = new Coordinates(playerCoordinates.X, playerCoordinates.Y, playerCoordinates.Z);
+    }
+
+    public struct Coordinates
+    {
+        private int x;
+        private int y;
+        private int z;
+        public int X { get { return x; } }
+        public int Y { get { return y; } }
+        public int Z { get { return z; } }
+        public Coordinates(int x, int y, int z)
         {
-            //first - player choses category from main Menu
-            int category = ChoseCategory();
-
-            //second - player enters name
-            //name validation
-            Console.Write("Enter yor name: ");
-            string playerName = Console.ReadLine();
-            NameValidation(playerName);
-
-            //how many moves player has to pass the cube????
-            int credits = 30;  //initial set credits to pass the cube
-            for (int moves = 0; moves <= credits; moves++)
-            {
-                credits--;
-                if (credits==0)
-                {
-                    //generates new cube with Random position
-                    //Random gen = new Random();
-                    //TheCube theCube = new theCube[9, 9, 9];
-                    credits = 30;
-                }
-            }
-
-            Player playerAtBegiining = new Player(playerName, credits, category);
-
-        }
-
-        static int ChoseCategory()
-        {
-            Console.WriteLine("Category Menu: \n1 - CSharp quiz \n2 - Science quiz \n3 - Music/Film quiz");
-            int category = int.Parse(Console.ReadLine());
-            switch (category)
-            {
-                case 1: category = 1; break;
-                case 2: category = 2; break;
-                case 3: category = 3; break;
-                default: break;
-            }
-            return category;
-        }
-
-        static void NameValidation(string name)
-        {
-            if (!Regex.Match(name, "^[A-Z][a-zA-Z]*$").Success)
-            {
-                Console.WriteLine("Invalid input! Please enter your name with captal, using letters only!");
-            }
-
+            this.x = x;
+            this.y = y;
+            this.z = z;
         }
     }
 
+    public enum Category { CSharpQuiz, ScienceQuiz, MusicFilmsQuiz };
+    //use gefault properties
+    public Category CategoryType
+    { get; set; }
 
-
-    public class Player
+    //property that gets and sets the name
+    public string Name
     {
-        private string name;
-        private int credits;
-        private int category;
-
-        public Player(string name, int credits, int category)
+        get
         {
-            this.name = name;
-            this.credits = credits;
-            this.category = category;
+            return name;
         }
-
-        public string Name
+        set
         {
-            get { return this.name; }
-            set { this.name = value; }
-        }
-
-        public int Credits
-        {
-            get { return this.credits; }
-            set { this.credits = value; }
-        }
-
-        public int Category
-        {
-            set { this.category = int.Parse(Console.ReadLine()); }
+            if (value.Length > 30)
+            {
+                //some default value
+                name = string.Empty;
+            }
+            else
+            {
+                name = value;
+            }
         }
     }
+
+    public int Credits
+    {
+        get
+        {
+            return credits;
+        }
+        set
+        {
+            if (value < 0)
+            {
+                //some default value
+                credits = 0;
+            }
+            else
+            {
+                credits = value;
+            }
+        }
+    }
+
+    public int BonusScore
+    {
+        get
+        {
+            return bonusScore;
+        }
+        set
+        {
+            if (value < 0)
+            {
+                bonusScore = 0;
+            }
+            else
+            {
+                //bonus score is left duration
+                bonusScore = value;
+            }
+        }
+    }
+
+    public override string ToString()
+    {
+        return string.Format("Player name: {0}, Credits: {1}, Chosen category: {2}, Bonus Scores: {3}, Coordinates {4},{5},{6}",
+                            name, credits, categoryType, bonusScore, coordinates.X, coordinates.Y, coordinates.Z);
+    }
+
+    public static void Main()
+    {
+        Player.Coordinates coordinates = new Player.Coordinates(3, 4, 5);
+        Player player = new Player("Reni", 30, Player.Category.CSharpQuiz, 60, coordinates);
+        Console.WriteLine(player.ToString());
+    }
+
 }
