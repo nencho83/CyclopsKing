@@ -13,13 +13,14 @@ class Utils
         int row = cubeSize / 2, column = row, depth = row;
         theCube[row, column, depth] = 1;
         int passableCellsCount = (int)(Math.Pow(cubeSize, 3) / 10);
-        StringBuilder positions = new StringBuilder();
         Hashtable passableCells = new Hashtable();
+        int count, direction;
 
         // generate 3D labyrinth
-        while (passableCells.Count < passableCellsCount)
+        while (true)
         {
-            switch (generator.Next(6))
+            direction = generator.Next(6);
+            switch (direction)
             {
                 case 0: // left
                     column--;
@@ -43,19 +44,32 @@ class Utils
                     break;
             }
 
-            // stop if the position goes out of the cube's borders
-            if ((row < 0 || row > cubeSize - 1 || column < 0 || column > cubeSize - 1 || depth < 0 || depth > cubeSize - 1))
+            if (passableCells.Count < passableCellsCount &&
+                (row < 1 || row > cubeSize - 2 || column < 1 || column > cubeSize - 2 || depth < 1 || depth > cubeSize - 2))
             {
                 row = column = depth = cubeSize / 2;
+                continue;
             }
+            else if (!(passableCells.Count < passableCellsCount) &&
+                (row < 0 || row > cubeSize - 1 || column < 0 || column > cubeSize - 1 || depth < 0 || depth > cubeSize - 1))
+            {
+                break;
+            }
+
+            count = 0;
+            if (row + 1 < cubeSize && theCube[row + 1, column, depth] == 1) count++;
+            if (row - 1 >= 0 && theCube[row - 1, column, depth] == 1) count++;
+            if (column + 1 < cubeSize && theCube[row, column + 1, depth] == 1) count++;
+            if (column - 1 >= 0 && theCube[row, column - 1, depth] == 1) count++;
+            if (depth + 1 < cubeSize && theCube[row, column, depth + 1] == 1) count++;
+            if (depth - 1 >= 0 && theCube[row, column, depth - 1] == 1) count++;
+            if (count > 2) continue;
 
             String position = row + "," + column + "," + depth;
             if (passableCells.ContainsKey(position)) continue;
 
             passableCells.Add(position, true);
-            positions.Append(position + "\n");
 
-            // set a passable cell
             theCube[row, column, depth] = 1;
         }
 
