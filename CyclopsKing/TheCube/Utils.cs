@@ -75,4 +75,43 @@ class Utils
 
         return theCube;
     }
+    public static bool displayChallenge(List<Challenge> questions)
+        {
+            Random r = new Random();
+            int rInt = r.Next(0, questions.Count);
+            while (questions[rInt].answered == 1)
+            {
+                r = new Random();
+                rInt = r.Next(0, questions.Count);
+            }
+            Challenge currChallenge = questions[rInt];
+            Console.WriteLine(currChallenge.question);
+            Console.WriteLine("Please enter the number of the current answer:");
+            Console.WriteLine("1." + currChallenge.answers[0]);
+            Console.WriteLine("2." + currChallenge.answers[0]);
+            Console.WriteLine("3." + currChallenge.answers[0]);
+            int i = 30;
+            
+            while ( !Console.KeyAvailable)
+            {
+                Console.SetCursorPosition(20, 15);
+                Console.Write("  ");
+                Console.SetCursorPosition(20, 15);
+                Console.Write("Time: {0}", i);
+                Thread.Sleep(1000);
+                i--;
+            }
+            System.ConsoleKeyInfo key = Console.ReadKey(true);
+            int selection=0;
+            if (key.Key == ConsoleKey.D1 || key.Key == ConsoleKey.NumPad1) selection = 1;
+            else if (key.Key == ConsoleKey.D2 || key.Key == ConsoleKey.NumPad2) selection = 2;
+            else if (key.Key == ConsoleKey.D3 || key.Key == ConsoleKey.NumPad3) selection = 3;
+
+            if (currChallenge.rightAnswer == currChallenge.answers[selection - 1])
+            {
+                return true;
+                questions[rInt].answered = 1;
+            }
+            else return false;
+        }
 }
