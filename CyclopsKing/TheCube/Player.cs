@@ -249,6 +249,75 @@ public class Player
         return direction;
     }
 
+    public void ChangeCoordinates(int direction)
+    {
+        //if player give correct anwer
+        bool isCorrectAnswer = true;
+        if (isCorrectAnswer)
+        {
+            switch (direction)
+            {
+                case 1:
+                    if (IsInCubeBoundary(coordinates.X, coordinates.Y - 1, coordinates.Z))
+                    {
+                        this.coordinates = new Coordinates(coordinates.X, coordinates.Y - 1, coordinates.Z);
+                        passedMoves = AddPassedMoves(coordinates.X, coordinates.Y - 1, coordinates.Z);
+                    }
+                    break;
+                case 2:
+                    if (IsInCubeBoundary(coordinates.X, coordinates.Y + 1, coordinates.Z))
+                    {
+                        this.coordinates = new Coordinates(coordinates.X, coordinates.Y + 1, coordinates.Z);
+                        passedMoves = AddPassedMoves(coordinates.X, coordinates.Y + 1, coordinates.Z);
+                    }
+                    break;
+                case 3:
+                    if (IsInCubeBoundary(coordinates.X, coordinates.Y, coordinates.Z - 1))
+                    {
+                        this.coordinates = new Coordinates(coordinates.X, coordinates.Y, coordinates.Z - 1);
+                        passedMoves = AddPassedMoves(coordinates.X, coordinates.Y, coordinates.Z - 1);
+                    }
+                    break;
+                case 4:
+                    if (IsInCubeBoundary(coordinates.X, coordinates.Y, coordinates.Z + 1))
+                    {
+                        this.coordinates = new Coordinates(coordinates.X, coordinates.Y, coordinates.Z + 1);
+                        passedMoves = AddPassedMoves(coordinates.X, coordinates.Y, coordinates.Z + 1);
+                    }
+                    break;
+                case 5:
+                    if (IsInCubeBoundary(coordinates.X - 1, coordinates.Y, coordinates.Z))
+                    {
+                        this.coordinates = new Coordinates(coordinates.X - 1, coordinates.Y, coordinates.Z);
+                        passedMoves = AddPassedMoves(coordinates.X - 1, coordinates.Y, coordinates.Z);
+                    }
+                    break;
+                case 6:
+                    if (IsInCubeBoundary(coordinates.X + 1, coordinates.Y, coordinates.Z))
+                    {
+                        this.coordinates = new Coordinates(coordinates.X + 1, coordinates.Y, coordinates.Z);
+                        passedMoves = AddPassedMoves(coordinates.X + 1, coordinates.Y, coordinates.Z);
+                    }
+                    break;
+            }
+            credits--;
+        }
+        else
+        {
+            credits--;
+        }
+
+    }
+
+    public bool IsInCubeBoundary(int row, int column, int depth)
+    {
+        bool inBoundary = true;
+        if ((row < 0 || row > cubeSize - 1 || column < 0 || column > cubeSize - 1 || depth < 0 || depth > cubeSize - 1))
+        {
+            inBoundary = false;
+        }
+        return inBoundary;
+    }
 
     public Hashtable AddPassedMoves(int x, int y, int z)
     {
