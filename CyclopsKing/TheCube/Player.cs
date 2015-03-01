@@ -3,7 +3,7 @@ using System.Collections;
 using System.Text.RegularExpressions;
 
 
-public class Player
+public class Player : IPlayer
 {
     const int cubeSize = 9;
 
@@ -199,7 +199,6 @@ public class Player
             }
             catch (Exception)
             {
-                //Console.Clear();
                 Console.WriteLine("Error Handling stopped the game from breaking here!");
                 choice = 0;
             }
@@ -218,7 +217,6 @@ public class Player
                 {
                     Console.WriteLine("\nThere is a wall on that direction, choose another one");
                     isWall = true;
-                    //direction = ChooseDirection();
                 }
                 break;
             case 2:
@@ -226,7 +224,6 @@ public class Player
                 {
                     Console.WriteLine("\nThere is a wall on that direction, choose another one");
                     isWall = true;
-                    //direction = ChooseDirection();
                 }
                 break;
             //Forward and Backward is for depth(Z)
@@ -235,7 +232,6 @@ public class Player
                 {
                     Console.WriteLine("\nThere is a wall on that direction, choose another one");
                     isWall = true;
-                    //direction = ChooseDirection();
                 }
                 break;
             case 4:
@@ -243,7 +239,6 @@ public class Player
                 {
                     Console.WriteLine("\nThere is a wall on that direction, choose another one");
                     isWall = true;
-                    //direction = ChooseDirection();
                 }
                 break;
             //Up and Down is for row(X)
@@ -252,7 +247,6 @@ public class Player
                 {
                     Console.WriteLine("\nThere is a wall on that direction, choose another one");
                     isWall = true;
-                    //direction = ChooseDirection();
                 }
                 break;
             case 6:
@@ -260,7 +254,6 @@ public class Player
                 {
                     Console.WriteLine("\nThere is a wall on that direction, choose another one");
                     isWall = true;
-                    //direction = ChooseDirection();
                 }
                 break;
         }
@@ -270,8 +263,7 @@ public class Player
 
     public void ChangeCoordinates(int direction, bool isCorrectAnswer)
     {
-        //if player give correct anwer
-        // isCorrectAnswer = true;
+        //if player give correct anwer -> change coordinates
         if (isCorrectAnswer)
         {
             switch (direction)
@@ -342,7 +334,6 @@ public class Player
     {
         string position = x + "," + y + "," + z;
         if(!this.passedMoves.Contains(position)) this.passedMoves.Add(position, true);
-        //return passedMoves;
     }
     public override string ToString()
     {
