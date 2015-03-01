@@ -196,11 +196,9 @@ public class Player
         return choice;
     }
 
-    public int CheckForWall(int direction)
+    public bool CheckForWall(int direction)
     {
         bool isWall = false;
-        do
-        {
             switch (direction)
             {
                 //Left and Right is for the column(Y)
@@ -209,7 +207,7 @@ public class Player
                     {
                         Console.WriteLine("There is a wall on that direction, choose another one");
                         isWall = true;
-                        direction = ChooseDirection();
+                        //direction = ChooseDirection();
                     }
                     break;
                 case 2:
@@ -217,7 +215,7 @@ public class Player
                     {
                         Console.WriteLine("There is a wall on that direction, choose another one");
                         isWall = true;
-                        direction = ChooseDirection();
+                        //direction = ChooseDirection();
                     }
                     break;
                 //Forward and Backward is for depth(Z)
@@ -226,7 +224,7 @@ public class Player
                     {
                         Console.WriteLine("There is a wall on that direction, choose another one");
                         isWall = true;
-                        direction = ChooseDirection();
+                        //direction = ChooseDirection();
                     }
                     break;
                 case 4:
@@ -234,7 +232,7 @@ public class Player
                     {
                         Console.WriteLine("There is a wall on that direction, choose another one");
                         isWall = true;
-                        direction = ChooseDirection();
+                        //direction = ChooseDirection();
                     }
                     break;
                 //Up and Down is for row(X)
@@ -243,7 +241,7 @@ public class Player
                     {
                         Console.WriteLine("There is a wall on that direction, choose another one");
                         isWall = true;
-                        direction = ChooseDirection();
+                        //direction = ChooseDirection();
                     }
                     break;
                 case 6:
@@ -251,12 +249,12 @@ public class Player
                     {
                         Console.WriteLine("There is a wall on that direction, choose another one");
                         isWall = true;
-                        direction = ChooseDirection();
+                        //direction = ChooseDirection();
                     }
                     break;
             }
-        } while (isWall == false);
-        return direction;
+        
+        return isWall;
     }
 
     public void ChangeCoordinates(int direction,bool isCorrectAnswer)

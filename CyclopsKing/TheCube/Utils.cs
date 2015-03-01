@@ -112,15 +112,15 @@ class Utils
             Console.WriteLine("3." + currChallenge.answers[0]);
             int i = 30;
             
-            while ( !Console.KeyAvailable)
-            {
-                Console.SetCursorPosition(20, 15);
-                Console.Write("  ");
-                Console.SetCursorPosition(20, 15);
-                Console.Write("Time: {0}", i);
-                Thread.Sleep(1000);
-                i--;
-            }
+            //while ( !Console.KeyAvailable)
+            //{
+            //    Console.SetCursorPosition(30, 35);
+            //    Console.Write("  ");
+            //    Console.SetCursorPosition(30, 35);
+            //    Console.Write("Time: {0}", i);
+            //    Thread.Sleep(1000);
+            //    i--;
+            //}
             System.ConsoleKeyInfo key = Console.ReadKey(true);
             int selection=0;
             if (key.Key == ConsoleKey.D1 || key.Key == ConsoleKey.NumPad1) selection = 1;
