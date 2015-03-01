@@ -9,5 +9,6 @@ class TheCube
     public static void Main(String[] args)
     {
         Menu.CallMenu();
+        Console.WriteLine("We are here");
     }
 }

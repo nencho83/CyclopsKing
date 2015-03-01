@@ -139,14 +139,22 @@ public class Player
         int choice = 1;
         do
         {
-            Console.Clear();
             if (choice < 1 || choice > 3) Console.WriteLine("No Category under this number");
             Console.WriteLine("Choose category and the number");
             Console.WriteLine("1 -> C#");
             Console.WriteLine("2 -> Science");
             Console.WriteLine("3 -> Music/Films");
             Console.Write("Your choice is: ");
-            choice = int.Parse(Console.ReadLine());
+            try
+            {
+                choice = int.Parse(Console.ReadLine());
+            }
+            catch (Exception)
+            {
+                Console.Clear();
+                Console.WriteLine("Error Handling stopped the game from breaking here!");
+                choice = 0;
+            }
         } while (choice < 1 || choice > 3);
         switch (choice)
         {

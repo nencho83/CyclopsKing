@@ -80,6 +80,7 @@ class Menu : IMenu
                 if (selection == 0)  {
                     Console.Clear();
                     TheCube.myPlayer = new Player();
+                    return;
                 } //StartGame;
                 else if (selection == 1) return;//Instructions;
                 else if (selection == 2) return;//Highscore;
