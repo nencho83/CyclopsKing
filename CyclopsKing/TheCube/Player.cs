@@ -192,7 +192,7 @@ public class Player
             Console.WriteLine("5 -> Up");
             Console.WriteLine("6 -> Down");
             choice = int.Parse(Console.ReadLine());
-        } while (choice < 0 && choice > 7);
+        } while (choice < 1 || choice > 6);
         return choice;
     }
 

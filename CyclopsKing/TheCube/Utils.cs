@@ -79,6 +79,22 @@ class Utils
 
         return theCube;
     }
+    public static Challenge takeParts(string text)
+    {
+        char[] delimiterChars = { ';' };
+        string[] words = text.Split(delimiterChars);
+        Challenge challengeTask = new Challenge();
+        challengeTask.category = words[0];
+        challengeTask.severity = int.Parse(words[1]);
+        challengeTask.question = words[2];
+        for (int i = 0; i < 3; i++)
+        {
+            challengeTask.answers[i] = words[i + 3];
+        }
+        challengeTask.rightAnswer = words[6];
+        challengeTask.answered = 0;
+        return challengeTask;
+    }
     public static bool displayChallenge(List<Challenge> questions)
         {
             Random r = new Random();

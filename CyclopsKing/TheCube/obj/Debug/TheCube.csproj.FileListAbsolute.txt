@@ -9,3 +9,4 @@ C:\Users\azz\Documents\GitHub\CyclopsKing\trunk\CyclopsKing\TheCube\obj\Debug\Th
 C:\Users\azz\Documents\GitHub\CyclopsKing\trunk\CyclopsKing\TheCube\bin\Debug\TheCube.exe
 C:\Users\azz\Documents\GitHub\CyclopsKing\trunk\CyclopsKing\TheCube\bin\Debug\TheCube.pdb
 C:\Users\azz\Documents\GitHub\CyclopsKing\trunk\CyclopsKing\TheCube\obj\Debug\TheCube.csprojResolveAssemblyReference.cache
+E:\Programs\GitHub\CyclopsKing\CyclopsKing\TheCube\obj\Debug\TheCube.csprojResolveAssemblyReference.cache
