@@ -11,7 +11,7 @@ public class Player
     private int credits;
     private Category categoryType;
     private int bonusScore;
-    private Coordinates coordinates;
+    public  Coordinates coordinates;
     private Hashtable passedMoves = new Hashtable();
 
     //constructor with no arguments
@@ -259,10 +259,10 @@ public class Player
         return direction;
     }
 
-    public void ChangeCoordinates(int direction)
+    public void ChangeCoordinates(int direction,bool isCorrectAnswer)
     {
         //if player give correct anwer
-        bool isCorrectAnswer = true;
+        // isCorrectAnswer = true;
         if (isCorrectAnswer)
         {
             switch (direction)
