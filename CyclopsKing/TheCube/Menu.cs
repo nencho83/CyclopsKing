@@ -55,7 +55,12 @@ class Menu : IMenu
         PrintMenu(selection, Options);
         while (true)
         {
+
             ConsoleKeyInfo pressedKey = Console.ReadKey();
+            bool irregularKeyPressed = pressedKey.Key != ConsoleKey.DownArrow ||
+                                       pressedKey.Key != ConsoleKey.UpArrow ||
+                                       pressedKey.Key != ConsoleKey.Escape ||
+                                       pressedKey.Key == ConsoleKey.Enter;
             if (pressedKey.Key == ConsoleKey.DownArrow || pressedKey.Key == ConsoleKey.UpArrow)
                 if (pressedKey.Key == ConsoleKey.DownArrow)
                 {
@@ -78,7 +83,8 @@ class Menu : IMenu
             }
             if (pressedKey.Key == ConsoleKey.Enter)
             {
-                if (selection == 0)  {
+                if (selection == 0)
+                {
                     Console.Clear();
                     TheCube.myPlayer = new Player();
                     return;
@@ -86,6 +92,11 @@ class Menu : IMenu
                 else if (selection == 1) return;//Instructions;
                 else if (selection == 2) return;//Highscore;
                 else if (selection == 3) return;//Exit
+            }
+
+            if (irregularKeyPressed==true)
+            {
+                PrintMenu(selection, Options);
             }
         }
     }
