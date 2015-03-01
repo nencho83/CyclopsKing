@@ -21,8 +21,7 @@ class TheCube
                 challenges.Add(Utils.takeParts(line));
                 // Console.WriteLine(challenges.Count);
             }
-        if(myPlayer.CheckForWall(myPlayer.ChooseDirection())>0
-            && (myPlayer.CheckForWall(myPlayer.ChooseDirection()) < 7)) Console.WriteLine("Yess");
+        if(myPlayer.CheckForWall(myPlayer.ChooseDirection())>0) Console.WriteLine("Yess");
         Console.WriteLine("We are here");
     }
 }
