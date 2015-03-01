@@ -52,7 +52,6 @@ class Menu : IMenu
         string[] Options = { "Start Game", "Instructions", "High Scores", "Exit" };
         int selection = 0;
         PrintMenu(selection, Options);
-        string nameOfPlayer = string.Empty;
         while (true)
         {
             ConsoleKeyInfo pressedKey = Console.ReadKey();
@@ -78,11 +77,7 @@ class Menu : IMenu
             }
             if (pressedKey.Key == ConsoleKey.Enter)
             {
-                if (selection == 0)
-                {
-                    Console.Clear();
-                    TheCube.myPlayer = new Player();
-                }
+                if (selection == 0) return; //StartGame;
                 else if (selection == 1) return;//Instructions;
                 else if (selection == 2) return;//Highscore;
                 else if (selection == 3) return;//Exit
