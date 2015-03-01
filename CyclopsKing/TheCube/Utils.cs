@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.IO;
 /// <summary>
 /// 
 /// </summary>
@@ -10,6 +11,7 @@ class Utils
 {
     public static int[, ,] GenerateLabyrinth(int cubeSize)
     {
+        string scores = File.ReadAllText(@"..\..\test.csv");
         Random generator = new Random();
         int[, ,] theCube = new int[cubeSize, cubeSize, cubeSize];
         int row = cubeSize / 2, column = row, depth = row;
@@ -116,4 +118,18 @@ class Utils
             }
             else return false;
         }
+    public static void WriteToCSV(List<string> lines, string path)
+    {
+        StreamWriter writer = new StreamWriter(@path);
+        using (writer)
+        {
+            for (int i = 0; i < lines.Count; i++)
+            {
+                if (i < lines.Count - 1)
+                    writer.WriteLine(lines[i]);
+                else
+                    writer.Write(lines[i]);
+            }
+        }
+    }
 }
