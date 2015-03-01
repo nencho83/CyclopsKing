@@ -22,23 +22,44 @@ When he successfully answers the last question he sees his current score and the
 
 ### II.Technical implementation of the game
 
-1. Main Menu 
-The method CallMenu() visualizes in the console 4 options. The Menu is implemented using
+1. Main Menu - the method CallMenu() visualizes in the console 4 options. The Menu is implemented using
 1 one-dimensional array that lists the main functionality of the game. The player can navigate and
 choose options from the Menu.
 
-2. Cube generation
-The Cube is built using 1 three-dimensional array with size 3x3x3. A random generator creates a
+2. Cube generation - The Cube is built using 1 three-dimensional array with size 3x3x3. A random generator creates a
 path with exit, and when the game starts the player is positioned in the middle of the cube.
 
-3. Player
-The Player class handles information about: Player, Coordinates, Category, Score.
+3. Player - The Player class handles information about: Player, Coordinates, Category, Score.
+
 This class has 8 methods:
-* Player() – initializes a player
-* Coordinates() – keeps the current position of the player
-* ChooseCategory() – in the beginning of the game the player chooses a category
-* Credits() –  the remaining moves of the player to exit The Cube
-* BonusScore() – formed from the remaining time which is added to the next question time for answering
-* ChooseDirection() – after giving an answer the player chooses his next direction
-* CheckForWall() – checks if the chosen direction is a wall
-* AddPassedMoves() – records Player’s passed moves 
+
+* Player() â€“ initializes a player
+* Coordinates() â€“ keeps the current position of the player
+* ChooseCategory() â€“ in the beginning of the game the player chooses a category
+* Credits() â€“  the remaining moves of the player to exit The Cube
+* BonusScore() â€“ formed from the remaining time which is added to the next question time for answering
+* ChooseDirection() â€“ after giving an answer the player chooses his next direction
+* CheckForWall() â€“ checks if the chosen direction is a wall
+* AddPassedMoves() â€“ records Playerâ€™s passed moves 
+
+4. Challenge
+
+This class has 2 methods:
+
+* TakeParts() â€“ read text file from CSV
+* DisplayChallenge() â€“ display questions and answers
+
+5. Scores
+
+This class has 2 methods:
+
+* SortScores() â€“ sorts the Top 10 scores in descending order
+* CalculateScore() â€“ calculates the score. Result is formed by the credits multiplied by the remaining time.
+
+6. Utility Class
+
+This class has 3 methods:
+
+* GenerateLabyrinth()
+* WriteToCSV() 
+* ReadFromCSV()
