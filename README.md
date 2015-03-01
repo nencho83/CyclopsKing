@@ -1,4 +1,4 @@
-The Cube
+﻿The Cube
 ====================
 ### I.Brief description of the game
 
