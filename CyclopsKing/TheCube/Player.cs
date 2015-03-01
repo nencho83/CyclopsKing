@@ -135,7 +135,7 @@ public class Player : IPlayer
     }
     public Category ChooseCategory()
     {
-        Category category = Category.CSharpQuiz;
+        Category category = Category.ITQuiz;
         int choice = 1;
         do
         {
