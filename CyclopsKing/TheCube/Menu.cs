@@ -92,20 +92,21 @@ class Menu : IMenu
                     TheCube.myPlayer = new Player();
                     return;
                 } //StartGame;
-                else if (selection == 1) Console.WriteLine("CVBCG");//Instructions;
+                else if (selection == 1)return; //Instructions;
                 else if (selection == 2) //Highscore;
                 {
-                    string scores = Utils.ReadFromCSV(@"..\..\Test.csv");
-                    Console.Clear();
-
-                    Console.WriteLine(scores);
-                    
-
+                     string scores=Utils.ReadFromCSV(@"..\..\Test.csv");
+                     Console.Clear();
+                     Console.WriteLine(scores);
+                     Console.ReadKey();
                 }
 
-                else if (selection == 3) Console.WriteLine("CVBCG"); ;//Exit
+               else if (selection == 3)//Exit
+                {
+                    System.Environment.Exit(0);
+                }
             }
-
+           
             if (irregularKeyPressed == true)
             {
                 PrintMenu(selection, Options);
