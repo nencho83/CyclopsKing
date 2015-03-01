@@ -11,7 +11,7 @@ class Utils
 {
     public static int[, ,] GenerateLabyrinth(int cubeSize)
     {
-        string scores = File.ReadAllText(@"..\..\Test.csv");
+        
         Random generator = new Random();
         int[, ,] theCube = new int[cubeSize, cubeSize, cubeSize];
         int row = cubeSize / 2, column = row, depth = row;
@@ -78,6 +78,11 @@ class Utils
         }
 
         return theCube;
+    }
+
+    public static string ReadFromCSV(string path)
+    {
+        return File.ReadAllText(@path);
     }
     public static Challenge takeParts(string text)
     {
