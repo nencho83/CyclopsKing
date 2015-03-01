@@ -22,14 +22,17 @@ When he successfully answers the last question he sees his current score and the
 
 ### II.Technical implementation of the game
 
-1. Main Menu - the method CallMenu() visualizes in the console 4 options. The Menu is implemented using
+### 1. Main Menu
+The method CallMenu() visualizes in the console 4 options. The Menu is implemented using
 1 one-dimensional array that lists the main functionality of the game. The player can navigate and
 choose options from the Menu.
 
-2. Cube generation - The Cube is built using 1 three-dimensional array with size 3x3x3. A random generator creates a
+### 2. Cube generation
+The Cube is built using 1 three-dimensional array with size 3x3x3. A random generator creates a
 path with exit, and when the game starts the player is positioned in the middle of the cube.
 
-3. Player - The Player class handles information about: Player, Coordinates, Category, Score.
+### 3. Player
+The Player class handles information about: Player, Coordinates, Category, Score.
 
 This class has 8 methods:
 
@@ -42,21 +45,21 @@ This class has 8 methods:
 * CheckForWall() – checks if the chosen direction is a wall
 * AddPassedMoves() – records Player’s passed moves 
 
- 4.Challenge
+### 4. Challenge
 
 This class has 2 methods:
 
 * TakeParts() – read text file from CSV
 * DisplayChallenge() – display questions and answers
 
- 5.Scores
+### 5. Scores
 
 This class has 2 methods:
 
 * SortScores() – sorts the Top 10 scores in descending order
 * CalculateScore() – calculates the score. Result is formed by the credits multiplied by the remaining time.
 
- 6.Utility Class
+### 6. Utility Class
 
 This class has 3 methods:
 
