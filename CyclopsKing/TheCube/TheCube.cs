@@ -24,10 +24,13 @@ class TheCube
         bool answered = false;
         do
         {
-            int curDirection = myPlayer.ChooseDirection();
+            foreach (string key in myPlayer.passedMoves.Keys)
+            {
+                Console.WriteLine(String.Format("{0}: {1}", key, myPlayer.passedMoves[key]));
+            } int curDirection = myPlayer.ChooseDirection();
             if (!myPlayer.CheckForWall(curDirection))
             {
-                if (curDirection > 0) answered = false;
+                if (curDirection > 0) answered = true;
                 myPlayer.ChangeCoordinates(curDirection, answered);
             }
 
