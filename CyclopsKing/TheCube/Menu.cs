@@ -31,8 +31,9 @@ class Menu : IMenu
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine(Options[0]);
                 Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", Options[1]));
-                Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", Options[2]));
                 Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", Options[2]));
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine(String.Format("{0," + Console.WindowWidth / 2 + "}", Options[3])); break;
             case 3:
                 Console.ForegroundColor = ConsoleColor.Gray;
