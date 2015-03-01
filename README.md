@@ -42,21 +42,21 @@ This class has 8 methods:
 * CheckForWall() – checks if the chosen direction is a wall
 * AddPassedMoves() – records Player’s passed moves 
 
-4. Challenge
+ 4.Challenge
 
 This class has 2 methods:
 
 * TakeParts() – read text file from CSV
 * DisplayChallenge() – display questions and answers
 
-5. Scores
+ 5.Scores
 
 This class has 2 methods:
 
 * SortScores() – sorts the Top 10 scores in descending order
 * CalculateScore() – calculates the score. Result is formed by the credits multiplied by the remaining time.
 
-6. Utility Class
+ 6.Utility Class
 
 This class has 3 methods:
 
