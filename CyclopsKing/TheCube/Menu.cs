@@ -4,8 +4,10 @@
 /// </summary>
 class Menu : IMenu
 {
+    
     static void PrintMenu(int selection, string[] Options)
     {
+        
         Console.CursorVisible = false;
         Console.Clear();
         int leftOffSet = (Console.WindowWidth / 2);
@@ -60,7 +62,7 @@ class Menu : IMenu
             bool irregularKeyPressed = pressedKey.Key != ConsoleKey.DownArrow ||
                                        pressedKey.Key != ConsoleKey.UpArrow ||
                                        pressedKey.Key != ConsoleKey.Escape ||
-                                       pressedKey.Key == ConsoleKey.Enter;
+                                       pressedKey.Key != ConsoleKey.Enter;
             if (pressedKey.Key == ConsoleKey.DownArrow || pressedKey.Key == ConsoleKey.UpArrow)
                 if (pressedKey.Key == ConsoleKey.DownArrow)
                 {
