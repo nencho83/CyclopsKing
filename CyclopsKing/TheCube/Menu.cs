@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 /// <summary>
 /// 
 /// </summary>
@@ -92,7 +93,15 @@ class Menu : IMenu
                     return;
                 } //StartGame;
                 else if (selection == 1) return;//Instructions;
-                else if (selection == 2) return;//Highscore;
+                else if (selection == 2) //Highscore;
+                {
+                    string scores = File.ReadAllText(@"..\..\Test.csv");
+                    Console.Clear();
+                    Console.WriteLine(scores); 
+                    PrintMenu(selection, Options);
+                   
+                }
+                     
                 else if (selection == 3) return;//Exit
             }
 
