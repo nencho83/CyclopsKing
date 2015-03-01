@@ -16,7 +16,7 @@ If the Player runs out of credits the game is over his score is recorded if it i
 
 ### II.Technical implementation of the game
 
-1. Main Menu
+1. Main Menu 
 The method CallMenu() visualizes in the console 4 options. The Menu is implemented using
 1 one-dimensional array that lists the main functionality of the game. The player can navigate and
 choose options from the Menu.
