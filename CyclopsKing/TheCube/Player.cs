@@ -320,7 +320,7 @@ public class Player
     public bool IsInCubeBoundary(int row, int column, int depth)
     {
         bool inBoundary = true;
-        if ((row < 0 || row > cubeSize - 1 || column < 0 || column > cubeSize - 1 || depth < 0 || depth > cubeSize - 1))
+        if ((row < 1 || row > cubeSize - 2 || column < 1 || column > cubeSize - 2 || depth < 1 || depth > cubeSize - 2))
         {
             inBoundary = false;
         }

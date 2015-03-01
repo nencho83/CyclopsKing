@@ -27,12 +27,12 @@ class TheCube
             int curDirection = myPlayer.ChooseDirection();
             if (!myPlayer.CheckForWall(curDirection))
             {
-                if (curDirection > 0) Console.WriteLine("yes");
+                if (curDirection > 0) answered = true;
                 myPlayer.ChangeCoordinates(curDirection, answered);
             }
 
         }
-        while (myPlayer.IsInCubeBoundary(myPlayer.coordinates.X, myPlayer.coordinates.Y, myPlayer.coordinates.Z));
+        while (myPlayer.IsInCubeBoundary(myPlayer.coordinates.X, myPlayer.coordinates.Y, myPlayer.coordinates.Z) && myPlayer.Credits>0);
         Console.WriteLine("We are here");
 
     }
