@@ -6,6 +6,8 @@ class Menu : IMenu
 {
     static void PrintMenu(int selection, string[] Options)
     {
+
+        Console.CursorVisible = false;
         Console.Clear();
         int leftOffSet = (Console.WindowWidth / 2);
         int topOffSet = (Console.WindowHeight / 2);
@@ -45,6 +47,7 @@ class Menu : IMenu
             default:
                 break;
         }
+
     }
     public static void CallMenu()
     {
@@ -83,6 +86,8 @@ class Menu : IMenu
                 else if (selection == 3) return;//Exit
             }
         }
+
+
     }
 }
 
