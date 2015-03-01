@@ -195,7 +195,7 @@ public class Player
             {
                 //Left and Right is for the column(Y)
                 case 1:
-                    if (TheCube.theCube[coordinates.X, coordinates.Y - 1, coordinates.Z] == 1 && IsInCubeBoundary(coordinates.X, coordinates.Y - 1, coordinates.Z))
+                    if (TheCube.theCubeLabyrinth[coordinates.X, coordinates.Y - 1, coordinates.Z] == 1 && IsInCubeBoundary(coordinates.X, coordinates.Y - 1, coordinates.Z))
                     {
                         Console.WriteLine("There is a wall on that direction, choose another one");
                         isWall = true;
@@ -203,7 +203,7 @@ public class Player
                     }
                     break;
                 case 2:
-                    if (TheCube.theCube[coordinates.X, coordinates.Y + 1, coordinates.Z] == 1 && IsInCubeBoundary(coordinates.X, coordinates.Y + 1, coordinates.Z))
+                    if (TheCube.theCubeLabyrinth[coordinates.X, coordinates.Y + 1, coordinates.Z] == 1 && IsInCubeBoundary(coordinates.X, coordinates.Y + 1, coordinates.Z))
                     {
                         Console.WriteLine("There is a wall on that direction, choose another one");
                         isWall = true;
@@ -212,7 +212,7 @@ public class Player
                     break;
                 //Forward and Backward is for depth(Z)
                 case 3:
-                    if (TheCube.theCube[coordinates.X, coordinates.Y, coordinates.Z - 1] == 1 && IsInCubeBoundary(coordinates.X, coordinates.Y, coordinates.Z - 1))
+                    if (TheCube.theCubeLabyrinth[coordinates.X, coordinates.Y, coordinates.Z - 1] == 1 && IsInCubeBoundary(coordinates.X, coordinates.Y, coordinates.Z - 1))
                     {
                         Console.WriteLine("There is a wall on that direction, choose another one");
                         isWall = true;
@@ -220,7 +220,7 @@ public class Player
                     }
                     break;
                 case 4:
-                    if (TheCube.theCube[coordinates.X, coordinates.Y, coordinates.Z + 1] == 1 && IsInCubeBoundary(coordinates.X, coordinates.Y, coordinates.Z + 1))
+                    if (TheCube.theCubeLabyrinth[coordinates.X, coordinates.Y, coordinates.Z + 1] == 1 && IsInCubeBoundary(coordinates.X, coordinates.Y, coordinates.Z + 1))
                     {
                         Console.WriteLine("There is a wall on that direction, choose another one");
                         isWall = true;
@@ -229,7 +229,7 @@ public class Player
                     break;
                 //Up and Down is for row(X)
                 case 5:
-                    if (TheCube.theCube[coordinates.X - 1, coordinates.Y, coordinates.Z] == 1 && IsInCubeBoundary(coordinates.X - 1, coordinates.Y, coordinates.Z))
+                    if (TheCube.theCubeLabyrinth[coordinates.X - 1, coordinates.Y, coordinates.Z] == 1 && IsInCubeBoundary(coordinates.X - 1, coordinates.Y, coordinates.Z))
                     {
                         Console.WriteLine("There is a wall on that direction, choose another one");
                         isWall = true;
@@ -237,7 +237,7 @@ public class Player
                     }
                     break;
                 case 6:
-                    if (TheCube.theCube[coordinates.X + 1, coordinates.Y, coordinates.Z] == 1 && IsInCubeBoundary(coordinates.X + 1, coordinates.Y, coordinates.Z))
+                    if (TheCube.theCubeLabyrinth[coordinates.X + 1, coordinates.Y, coordinates.Z] == 1 && IsInCubeBoundary(coordinates.X + 1, coordinates.Y, coordinates.Z))
                     {
                         Console.WriteLine("There is a wall on that direction, choose another one");
                         isWall = true;
