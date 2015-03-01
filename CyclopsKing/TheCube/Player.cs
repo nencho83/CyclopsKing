@@ -22,7 +22,7 @@ public class Player
         this.categoryType = ChooseCategory();
         this.bonusScore = SetBonusScore();
         this.coordinates = new Coordinates(cubeSize / 2, cubeSize / 2, cubeSize / 2);
-        passedMoves = AddPassedMoves(coordinates.X, coordinates.Y, coordinates.Z);
+        this.passedMoves = AddPassedMoves(coordinates.X, coordinates.Y, coordinates.Z);
     }
     //constructor with arguments
     public Player(string playerName, int playerCredits, Category categoryChoise, int playerBonusScore, Coordinates playerCoordinates, Hashtable playerPassedMoves)
@@ -269,50 +269,50 @@ public class Player
                     if (IsInCubeBoundary(coordinates.X, coordinates.Y - 1, coordinates.Z))
                     {
                         this.coordinates = new Coordinates(coordinates.X, coordinates.Y - 1, coordinates.Z);
-                        passedMoves = AddPassedMoves(coordinates.X, coordinates.Y - 1, coordinates.Z);
+                        this.passedMoves = AddPassedMoves(coordinates.X, coordinates.Y - 1, coordinates.Z);
                     }
                     break;
                 case 2:
                     if (IsInCubeBoundary(coordinates.X, coordinates.Y + 1, coordinates.Z))
                     {
                         this.coordinates = new Coordinates(coordinates.X, coordinates.Y + 1, coordinates.Z);
-                        passedMoves = AddPassedMoves(coordinates.X, coordinates.Y + 1, coordinates.Z);
+                        this.passedMoves = AddPassedMoves(coordinates.X, coordinates.Y + 1, coordinates.Z);
                     }
                     break;
                 case 3:
                     if (IsInCubeBoundary(coordinates.X, coordinates.Y, coordinates.Z - 1))
                     {
                         this.coordinates = new Coordinates(coordinates.X, coordinates.Y, coordinates.Z - 1);
-                        passedMoves = AddPassedMoves(coordinates.X, coordinates.Y, coordinates.Z - 1);
+                        this.passedMoves = AddPassedMoves(coordinates.X, coordinates.Y, coordinates.Z - 1);
                     }
                     break;
                 case 4:
                     if (IsInCubeBoundary(coordinates.X, coordinates.Y, coordinates.Z + 1))
                     {
                         this.coordinates = new Coordinates(coordinates.X, coordinates.Y, coordinates.Z + 1);
-                        passedMoves = AddPassedMoves(coordinates.X, coordinates.Y, coordinates.Z + 1);
+                        this.passedMoves = AddPassedMoves(coordinates.X, coordinates.Y, coordinates.Z + 1);
                     }
                     break;
                 case 5:
                     if (IsInCubeBoundary(coordinates.X - 1, coordinates.Y, coordinates.Z))
                     {
                         this.coordinates = new Coordinates(coordinates.X - 1, coordinates.Y, coordinates.Z);
-                        passedMoves = AddPassedMoves(coordinates.X - 1, coordinates.Y, coordinates.Z);
+                        this.passedMoves = AddPassedMoves(coordinates.X - 1, coordinates.Y, coordinates.Z);
                     }
                     break;
                 case 6:
                     if (IsInCubeBoundary(coordinates.X + 1, coordinates.Y, coordinates.Z))
                     {
                         this.coordinates = new Coordinates(coordinates.X + 1, coordinates.Y, coordinates.Z);
-                        passedMoves = AddPassedMoves(coordinates.X + 1, coordinates.Y, coordinates.Z);
+                        this.passedMoves = AddPassedMoves(coordinates.X + 1, coordinates.Y, coordinates.Z);
                     }
                     break;
             }
-            credits--;
+            this.credits--;
         }
         else
         {
-            credits--;
+            this.credits--;
         }
 
     }

@@ -92,18 +92,18 @@ class Menu : IMenu
                     TheCube.myPlayer = new Player();
                     return;
                 } //StartGame;
-                else if (selection == 1) return;//Instructions;
+                else if (selection == 1) Console.WriteLine("CVBCG");//Instructions;
                 else if (selection == 2) //Highscore;
                 {
                     string scores = Utils.ReadFromCSV(@"..\..\Test.csv");
                     Console.Clear();
 
                     Console.WriteLine(scores);
-                    return;
+                    
 
                 }
 
-                else if (selection == 3) return;//Exit
+                else if (selection == 3) Console.WriteLine("CVBCG"); ;//Exit
             }
 
             if (irregularKeyPressed == true)
