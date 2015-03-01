@@ -121,9 +121,11 @@ public class Player
         string playerName = string.Empty;
         //allowed characters are lower and upper letters and underscores
         string allowCharacters = "^[a-zA-Z0-9_]*$";
-        bool isValid;
+        bool isValid = true;
         do
         {
+            Console.Clear();
+            if (playerName.Length > 30 || !isValid) Console.WriteLine(@"Allowed characters : [a-zA-Z0-9_]");
             Console.WriteLine("Insert player name");
             playerName = Console.ReadLine();
             isValid = Regex.Match(playerName, allowCharacters).Success;
@@ -131,20 +133,21 @@ public class Player
         Console.Clear();
         return playerName;
     }
-
     public Category ChooseCategory()
     {
         Category category = Category.CSharpQuiz;
-        int choice;
+        int choice = 1;
         do
         {
+            Console.Clear();
+            if (choice < 1 || choice > 3) Console.WriteLine("No Category under this number");
             Console.WriteLine("Choose category and the number");
             Console.WriteLine("1 -> C#");
             Console.WriteLine("2 -> Science");
             Console.WriteLine("3 -> Music/Films");
             Console.Write("Your choice is: ");
             choice = int.Parse(Console.ReadLine());
-        } while (choice < 0 && choice > 4);
+        } while (choice < 1 || choice > 3);
         switch (choice)
         {
             case 1:
@@ -160,7 +163,6 @@ public class Player
         Console.Clear();
         return category;
     }
-
     public int SetBonusScore()
     {
         int duration = 30;

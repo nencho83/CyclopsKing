@@ -77,7 +77,10 @@ class Menu : IMenu
             }
             if (pressedKey.Key == ConsoleKey.Enter)
             {
-                if (selection == 0) return; //StartGame;
+                if (selection == 0)  {
+                    Console.Clear();
+                    TheCube.myPlayer = new Player();
+                } //StartGame;
                 else if (selection == 1) return;//Instructions;
                 else if (selection == 2) return;//Highscore;
                 else if (selection == 3) return;//Exit
