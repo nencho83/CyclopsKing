@@ -5,10 +5,10 @@ using System.IO;
 /// </summary>
 class Menu : IMenu
 {
-    
+
     static void PrintMenu(int selection, string[] Options)
     {
-        
+
         Console.CursorVisible = false;
         Console.Clear();
         int leftOffSet = (Console.WindowWidth / 2);
@@ -95,17 +95,18 @@ class Menu : IMenu
                 else if (selection == 1) return;//Instructions;
                 else if (selection == 2) //Highscore;
                 {
-                    string scores = File.ReadAllText(@"..\..\Test.csv");
+                    string scores = Utils.ReadFromCSV(@"..\..\Test.csv");
                     Console.Clear();
-                    Console.WriteLine(scores); 
-                    PrintMenu(selection, Options);
-                   
+
+                    Console.WriteLine(scores);
+                    return;
+
                 }
-                     
+
                 else if (selection == 3) return;//Exit
             }
 
-            if (irregularKeyPressed==true)
+            if (irregularKeyPressed == true)
             {
                 PrintMenu(selection, Options);
             }
