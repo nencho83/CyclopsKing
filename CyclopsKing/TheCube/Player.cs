@@ -51,7 +51,7 @@ public class Player : IPlayer
         }
     }
 
-    public enum Category { CSharpQuiz, ScienceQuiz, MusicFilmsQuiz };
+    public enum Category { ITQuiz, MovieQuiz, ScienceQuiz };
     //use gefault properties
     public Category CategoryType
     { get; set; }
@@ -141,9 +141,9 @@ public class Player : IPlayer
         {
             if (choice < 1 || choice > 3) Console.WriteLine("\nNo Category under this number");
             Console.WriteLine("Choose category and the number");
-            Console.WriteLine("1 -> C#");
-            Console.WriteLine("2 -> Science");
-            Console.WriteLine("3 -> Music/Films");
+            Console.WriteLine("1 -> IT quiz");
+            Console.WriteLine("2 -> Movie quiz");
+            Console.WriteLine("3 -> Science quiz");
             Console.Write("Your choice is: ");
             try
             {
@@ -159,13 +159,13 @@ public class Player : IPlayer
         switch (choice)
         {
             case 1:
-                category = Category.CSharpQuiz;
+                category = Category.ITQuiz;
                 break;
             case 2:
-                category = Category.ScienceQuiz;
+                category = Category.MovieQuiz;
                 break;
             case 3:
-                category = Category.MusicFilmsQuiz;
+                category = Category.ScienceQuiz;
                 break;
         }
         Console.Clear();
