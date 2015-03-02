@@ -98,16 +98,24 @@ class TheCube
     private static string ProcessDirection(Player player, int row, int column, int depth)
     {
         string position = null;
-        if (IsDirectionPassable(row, column, depth) && Utils.DisplayChallenge(challenges))
+        if (IsDirectionPassable(row, column, depth))
         {
-            position = string.Format("{0},{1},{2}", row, column, depth);
-            if (!player.IsVisited(position))
+            if (Utils.DisplayChallenge(challenges))
             {
-                player.MarkVisited(position);
-                player.Credits--;
+                position = string.Format("{0},{1},{2}", row, column, depth);
+                if (!player.IsVisited(position))
+                {
+                    player.MarkVisited(position);
+                    player.Credits--;
+                }
+                player.Position = new Player.Coordinate(row, column, depth);
             }
-            player.Position = new Player.Coordinate(row, column, depth);
         }
+        else
+        {
+            Console.WriteLine("You hit a Wall! Try again!");
+        }
+
 
         return position;
     }
