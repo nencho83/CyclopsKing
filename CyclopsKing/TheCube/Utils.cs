@@ -70,12 +70,12 @@ class Utils
     {
         StringBuilder labyrinthToSave = new StringBuilder();
 
-        for (int row = 0; row < 9; row++)
+        for (int row = 0; row < labyrinth.GetLength(0); row++)
         {
             labyrinthToSave.AppendLine("row = " + row);
-            for (int depth = 0; depth < 9; depth++)
+            for (int depth = 0; depth < labyrinth.GetLength(0); depth++)
             {
-                for (int column = 0; column < 9; column++)
+                for (int column = 0; column < labyrinth.GetLength(0); column++)
                 {
                     labyrinthToSave.Append(labyrinth[row, column, depth] + " ");
                 }
