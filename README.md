@@ -17,52 +17,50 @@ When he gives wrong answer his credits decreased he stays in the same room and n
 If the Player runs out of credits the game is over his score is recorded if it is among the Top 10 scores.
 
 If the Player gives the correct answer he chooses his next direction. The closer he gets to the wall of the room, 
-which is the exit of The Cube, the harder the question gets. 
+which is the exit of The Cube, the harder the questions get. 
 When he successfully answers the last question he sees his current score and the rank list.
 
 ### II.Technical implementation of the game
 
 ### 1. Main Menu
-The method CallMenu() visualizes in the console 4 options. The Menu is implemented using
-1 one-dimensional array that lists the main functionality of the game. The player can navigate and
-choose options from the Menu.
+The method PrintMenu() visualizes 4 options in the console. The Menu is implemented using
+**1 one-dimensional** array that lists the main functionality of the game. The player can navigate and choose options from the Menu.
 
 ### 2. Cube generation
-The Cube is built using 1 three-dimensional array with size 3x3x3. A random generator creates a
-path with exit, and when the game starts the player is positioned in the middle of the cube.
+The Cube is built using **1 three-dimensional** array with size 3x3x3. A random generator creates a path with exit, and when the game starts the player is positioned in the middle of the cube.
 
 ### 3. Player
-The Player class handles information about: Player, Coordinates, Category, Score.
-
-This class has 8 methods:
+The Player class handles information about the player, his coordinates in the cube, the selected category of questions and his score.
 
 * Player() – initializes a player
-* Coordinates() – keeps the current position of the player
-* ChooseCategory() – in the beginning of the game the player chooses a category
-* Credits() –  the remaining moves of the player to exit The Cube
-* BonusScore() – formed from the remaining time which is added to the next question time for answering
+* Coordinate struct – keeps the current position of the player
+* Category() – the category of questions selected by the player
+* Credits() –  the remaining moves of the player
+* BonusScore() – holds the bonus score of the player
 * ChooseDirection() – after giving an answer the player chooses his next direction
-* CheckForWall() – checks if the chosen direction is a wall
-* AddPassedMoves() – records Player’s passed moves 
+* IsVisited() - checks whether the player has visited the selected room
+* MarkVisited() – marks the past moves of the player
 
 ### 4. Challenge
 
-This class has 2 methods:
-
-* TakeParts() – read text file from CSV
-* DisplayChallenge() – display questions and answers
+* Challange() - handles information about the question
+* Question
+* CorrectAnswer
+* Answers
+* IsAnswered
+* Severity
 
 ### 5. Scores
 
-This class has 2 methods:
-
 * SortScores() – sorts the Top 10 scores in descending order
-* CalculateScore() – calculates the score. Result is formed by the credits multiplied by the remaining time.
+* CalculateScore() – the score is calculated by the credits multiplied by the remaining time.
 
 ### 6. Utility Class
 
-This class has 3 methods:
-
-* GenerateLabyrinth()
-* WriteToCSV() 
+* Generate3DLabyrinth()
+* SaveLabyrinthStructure()
 * ReadFromCSV()
+* WriteToCSV() 
+* ExtractChallenge()
+* DisplayChallenge()
+* ChooseCategory()
