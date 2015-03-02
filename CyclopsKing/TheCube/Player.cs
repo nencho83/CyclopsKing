@@ -1,343 +1,127 @@
 ﻿using System;
 using System.Collections;
 using System.Text.RegularExpressions;
-
-
+/// <summary>
+/// 
+/// </summary>
 public class Player : IPlayer
 {
-    const int cubeSize = 9;
-
-    private string name;
+    private string nickname;
     private int credits;
-    private Category categoryType;
     private int bonusScore;
-    public Coordinates coordinates;
-    public Hashtable passedMoves = new Hashtable();
+    private Category category;
+    private Coordinate position;
+    public Hashtable visited = new Hashtable();
 
-    //constructor with no arguments
-    public Player()
+    public Player(string nickname, int credits, Category category, int bonusScore, Coordinate position)
     {
-        this.name = SetName();
-        this.credits = cubeSize * 2;
-        this.categoryType = ChooseCategory();
-        this.bonusScore = SetBonusScore();
-        this.coordinates = new Coordinates(cubeSize / 2, cubeSize / 2, cubeSize / 2);
-        AddPassedMoves(coordinates.X, coordinates.Y, coordinates.Z);
-    }
-    //constructor with arguments
-    public Player(string playerName, int playerCredits, Category categoryChoise, int playerBonusScore, Coordinates playerCoordinates, Hashtable playerPassedMoves)
-    {
-        Name = playerName;
-        Credits = playerCredits;
-        CategoryType = categoryChoise;
-        BonusScore = playerBonusScore;
-        coordinates = new Coordinates(playerCoordinates.X, playerCoordinates.Y, playerCoordinates.Z);
-        AddPassedMoves(coordinates.X, coordinates.Y, coordinates.Z);
+        this.nickname = nickname;
+        this.credits = credits;
+        this.category = category;
+        this.bonusScore = bonusScore;
+        this.position = position;
+        MarkVisited(string.Format("{0},{1},{2}", position.Row, position.Column, position.Depth));
     }
 
-    public struct Coordinates
+    public string Nickname
     {
-        private int x;
-        private int y;
-        private int z;
-        public int X { get { return x; } }
-        public int Y { get { return y; } }
-        public int Z { get { return z; } }
-        public Coordinates(int x, int y, int z)
-        {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-        }
-    }
-
-    public enum Category { ITQuiz, MovieQuiz, ScienceQuiz };
-    //use gefault properties
-    public Category CategoryType
-    { get; set; }
-
-    //property that gets and sets the name
-    public string Name
-    {
-        get
-        {
-            return name;
-        }
-        set
-        {
-            if (value.Length > 30)
-            {
-                name = value.Remove(30, (value.Length - 30));
-            }
-            else
-            {
-                name = value;
-            }
-        }
+        get { return nickname; }
+        set { nickname = value.Length > 30 ? value.Remove(30, (value.Length - 30)) : value; }
     }
 
     public int Credits
     {
-        get
-        {
-            return credits;
-        }
-        set
-        {
-            if (value < 0)
-            {
-                //some default value
-                credits = 0;
-            }
-            else
-            {
-                credits = value;
-            }
-        }
+        get { return this.credits; }
+        set { this.credits = value < 0 ? 0 : value; }
     }
 
     public int BonusScore
     {
-        get
-        {
-            return bonusScore;
-        }
-        set
-        {
-            if (value < 0)
-            {
-                bonusScore = 0;
-            }
-            else
-            {
-                //bonus score is left duration
-                bonusScore = value;
-            }
-        }
+        get { return this.bonusScore; }
+        set { this.bonusScore = value < 0 ? 0 : value; }
     }
 
-    public string SetName()
+    public Category Category
     {
-        string playerName = string.Empty;
-        //allowed characters are lower and upper letters and underscores
-        string allowCharacters = "^[a-zA-Z0-9_]*$";
-        bool isValid = true;
-        do
-        {
-            Console.Clear();
-            if (playerName.Length > 30 || !isValid) Console.WriteLine(@"Allowed characters : [a-zA-Z0-9_]");
-            Console.WriteLine("Insert player name");
-            playerName = Console.ReadLine();
-            isValid = Regex.Match(playerName, allowCharacters).Success;
-        } while (playerName.Length > 30 || !isValid);
-        Console.Clear();
-        return playerName;
-    }
-    public Category ChooseCategory()
-    {
-        Category category = Category.ITQuiz;
-        int choice = 1;
-        do
-        {
-            if (choice < 1 || choice > 3) Console.WriteLine("\nNo Category under this number");
-            Console.WriteLine("Choose category and the number");
-            Console.WriteLine("1 -> IT quiz");
-            Console.WriteLine("2 -> Movie quiz");
-            Console.WriteLine("3 -> Science quiz");
-            Console.Write("Your choice is: ");
-            try
-            {
-                choice = int.Parse(Console.ReadLine());
-            }
-            catch (Exception)
-            {
-                Console.Clear();
-                Console.WriteLine("Error Handling stopped the game from breaking here!");
-                choice = 0;
-            }
-        } while (choice < 1 || choice > 3);
-        switch (choice)
-        {
-            case 1:
-                category = Category.ITQuiz;
-                break;
-            case 2:
-                category = Category.MovieQuiz;
-                break;
-            case 3:
-                category = Category.ScienceQuiz;
-                break;
-        }
-        Console.Clear();
-        return category;
-    }
-    public int SetBonusScore()
-    {
-        int duration = 30;
-        //some operations with duration
-        int bonusScore = duration;
-        return bonusScore;
+        get { return this.category; }
+        set { this.category = value; }
     }
 
-    public int ChooseDirection()
+    public Coordinate Position
     {
-        int choice = 1;
-        do
-        {
-            if (choice < 1 || choice > 6) Console.WriteLine("\nNo direction under this number");
-            Console.WriteLine("Choose direction and the number");
-            Console.WriteLine("1 -> Left");
-            Console.WriteLine("2 -> Right");
-            Console.WriteLine("3 -> Forward");
-            Console.WriteLine("4 -> Backward");
-            Console.WriteLine("5 -> Up");
-            Console.WriteLine("6 -> Down");
-            Console.Write("Your choice is: ");
-            try
-            {
-                choice = int.Parse(Console.ReadLine());
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Error Handling stopped the game from breaking here!");
-                choice = 0;
-            }
-        } while (choice < 1 || choice > 6);
-        return choice;
+        get { return this.position; }
+        set { this.position = value; }
     }
 
-    public bool CheckForWall(int direction)
+    public Direction ChooseDirection()
     {
-        bool isWall = false;
-        switch (direction)
-        {
-            //Left and Right is for the column(Y)
-            case 1:
-                if (TheCube.theCubeLabyrinth[coordinates.X, coordinates.Y - 1, coordinates.Z] == 1 && IsInCubeBoundary(coordinates.X, coordinates.Y - 1, coordinates.Z))
-                {
-                    Console.WriteLine("\nThere is a wall on that direction, choose another one");
-                    isWall = true;
-                }
-                break;
-            case 2:
-                if (TheCube.theCubeLabyrinth[coordinates.X, coordinates.Y + 1, coordinates.Z] == 1 && IsInCubeBoundary(coordinates.X, coordinates.Y + 1, coordinates.Z))
-                {
-                    Console.WriteLine("\nThere is a wall on that direction, choose another one");
-                    isWall = true;
-                }
-                break;
-            //Forward and Backward is for depth(Z)
-            case 3:
-                if (TheCube.theCubeLabyrinth[coordinates.X, coordinates.Y, coordinates.Z - 1] == 1 && IsInCubeBoundary(coordinates.X, coordinates.Y, coordinates.Z - 1))
-                {
-                    Console.WriteLine("\nThere is a wall on that direction, choose another one");
-                    isWall = true;
-                }
-                break;
-            case 4:
-                if (TheCube.theCubeLabyrinth[coordinates.X, coordinates.Y, coordinates.Z + 1] == 1 && IsInCubeBoundary(coordinates.X, coordinates.Y, coordinates.Z + 1))
-                {
-                    Console.WriteLine("\nThere is a wall on that direction, choose another one");
-                    isWall = true;
-                }
-                break;
-            //Up and Down is for row(X)
-            case 5:
-                if (TheCube.theCubeLabyrinth[coordinates.X - 1, coordinates.Y, coordinates.Z] == 1 && IsInCubeBoundary(coordinates.X - 1, coordinates.Y, coordinates.Z))
-                {
-                    Console.WriteLine("\nThere is a wall on that direction, choose another one");
-                    isWall = true;
-                }
-                break;
-            case 6:
-                if (TheCube.theCubeLabyrinth[coordinates.X + 1, coordinates.Y, coordinates.Z] == 1 && IsInCubeBoundary(coordinates.X + 1, coordinates.Y, coordinates.Z))
-                {
-                    Console.WriteLine("\nThere is a wall on that direction, choose another one");
-                    isWall = true;
-                }
-                break;
-        }
+        Direction cmd = Direction.UP;
+        Console.WriteLine("Enter a direction:");
 
-        return isWall;
-    }
-
-    public void ChangeCoordinates(int direction, bool isCorrectAnswer)
-    {
-        //if player give correct anwer -> change coordinates
-        if (isCorrectAnswer)
+        bool isInvalidCommand = true;
+        while (isInvalidCommand)
         {
-            switch (direction)
+            isInvalidCommand = false;
+            switch (Console.ReadLine().ToLower())
             {
-                case 1:
-                    if (IsInCubeBoundary(coordinates.X, coordinates.Y - 1, coordinates.Z))
-                    {
-                        this.coordinates = new Coordinates(coordinates.X, coordinates.Y - 1, coordinates.Z);
-                        AddPassedMoves(coordinates.X, coordinates.Y - 1, coordinates.Z);
-                    }
-                    break;
-                case 2:
-                    if (IsInCubeBoundary(coordinates.X, coordinates.Y + 1, coordinates.Z))
-                    {
-                        this.coordinates = new Coordinates(coordinates.X, coordinates.Y + 1, coordinates.Z);
-                         AddPassedMoves(coordinates.X, coordinates.Y + 1, coordinates.Z);
-                    }
-                    break;
-                case 3:
-                    if (IsInCubeBoundary(coordinates.X, coordinates.Y, coordinates.Z - 1))
-                    {
-                        this.coordinates = new Coordinates(coordinates.X, coordinates.Y, coordinates.Z - 1);
-                        AddPassedMoves(coordinates.X, coordinates.Y, coordinates.Z - 1);
-                    }
-                    break;
-                case 4:
-                    if (IsInCubeBoundary(coordinates.X, coordinates.Y, coordinates.Z + 1))
-                    {
-                        this.coordinates = new Coordinates(coordinates.X, coordinates.Y, coordinates.Z + 1);
-                        AddPassedMoves(coordinates.X, coordinates.Y, coordinates.Z + 1);
-                    }
-                    break;
-                case 5:
-                    if (IsInCubeBoundary(coordinates.X - 1, coordinates.Y, coordinates.Z))
-                    {
-                        this.coordinates = new Coordinates(coordinates.X - 1, coordinates.Y, coordinates.Z);
-                         AddPassedMoves(coordinates.X - 1, coordinates.Y, coordinates.Z);
-                    }
-                    break;
-                case 6:
-                    if (IsInCubeBoundary(coordinates.X + 1, coordinates.Y, coordinates.Z))
-                    {
-                        this.coordinates = new Coordinates(coordinates.X + 1, coordinates.Y, coordinates.Z);
-                        AddPassedMoves(coordinates.X + 1, coordinates.Y, coordinates.Z);
-                    }
+                case "up": cmd = Direction.UP; break;
+                case "down": cmd = Direction.DOWN; break;
+                case "left": cmd = Direction.LEFT; break;
+                case "right": cmd = Direction.RIGHT; break;
+                case "forward": cmd = Direction.FORWARD; break;
+                case "backward": cmd = Direction.BACKWARD; break;
+
+                default:
+                    Console.WriteLine("There is no such direction! Please choose valid direction:");
+                    isInvalidCommand = true;
                     break;
             }
-            this.credits--;
-        }
-        else
-        {
-            this.credits--;
         }
 
+        return cmd;
     }
 
-    public bool IsInCubeBoundary(int row, int column, int depth)
+    public bool IsVisited(string position)
     {
-        bool inBoundary = true;
-        if ((row < 1 || row > cubeSize - 2 || column < 1 || column > cubeSize - 2 || depth < 1 || depth > cubeSize - 2))
-        {
-            inBoundary = false;
-        }
-        return inBoundary;
+        return this.visited.Contains(position);
     }
 
-    public void AddPassedMoves(int x, int y, int z)
+    public void MarkVisited(string position)
     {
-        string position = x + "," + y + "," + z;
-        if(!this.passedMoves.Contains(position)) this.passedMoves.Add(position, true);
+        this.visited.Add(position, true);
     }
+
     public override string ToString()
     {
-        return string.Format("Player name: {0}\nCredits: {1}\nChosen category: {2}\nBonus Scores: {3}\nCoordinates {4},{5},{6}",
-                            name, credits, categoryType, bonusScore, coordinates.X, coordinates.Y, coordinates.Z);
+        return string.Format("{0}|{1}|{2}|{3}", nickname, credits, category, bonusScore);
+    }
+
+    public struct Coordinate
+    {
+        private int row;
+        private int column;
+        private int depth;
+
+        public int Row
+        {
+            get { return this.row; }
+            set { this.row = value; }
+        }
+        public int Column
+        {
+            get { return this.column; }
+            set { this.column = value; }
+        }
+        public int Depth
+        {
+            get { return this.depth; }
+            set { this.depth = value; }
+        }
+        public Coordinate(int row, int column, int depth)
+        {
+            this.row = row;
+            this.column = column;
+            this.depth = depth;
+        }
     }
 }

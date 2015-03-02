@@ -1,44 +1,119 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 /// <summary>
 /// 
 /// </summary>
 class TheCube
 {
-    public static int[, ,] theCubeLabyrinth = Utils.GenerateLabyrinth(9);
-    public static Player myPlayer;
-    public static List<Challenge> challenges = new List<Challenge>();
+    private static int[, ,] labyrinth;
+    private static List<Challenge> challenges = new List<Challenge>();
+
+    private static Random generator = new Random();
 
     public static void Main(String[] args)
     {
-        Menu.CallMenu();
-        // Read each line of the file into a string array. Each element of the array is one line of the file. 
-        string[] lines = System.IO.File.ReadAllLines(@"..\..\computer_skills_severity_1.csv");
+        int cubeSize = 9;
+        labyrinth = Utils.Generate3DLabyrinth(cubeSize);
 
-        // Display the file contents by using a foreach loop.          
-        foreach (string line in lines)
+        Utils.SaveLabyrinthStructure(labyrinth);
+
+        Menu menu = new Menu();
+        menu.DisplayMenu();
+
+        Player player = CreatePlayer(cubeSize / 2);
+
+        string line;
+        using (StreamReader reader = new StreamReader(@".\..\..\" + player.Category + "_Questions.csv"))
         {
-            challenges.Add(Utils.takeParts(line));
-            // Console.WriteLine(challenges.Count);
-        }
-        bool answered = false;
-        do
-        {
-            foreach (string key in myPlayer.passedMoves.Keys)
+            while ((line = reader.ReadLine()) != null)
             {
-                Console.WriteLine(String.Format("{0}: {1}", key, myPlayer.passedMoves[key]));
-            } int curDirection = myPlayer.ChooseDirection();
-            if (!myPlayer.CheckForWall(curDirection))
-            {
-                if (curDirection > 0) answered = true;
-                myPlayer.ChangeCoordinates(curDirection, answered);
+                Challenge challenge = Utils.ExtractChallenge(line.Split('|'));
+                challenges.Add(challenge);
             }
-
         }
-        while (myPlayer.IsInCubeBoundary(myPlayer.coordinates.X, myPlayer.coordinates.Y, myPlayer.coordinates.Z) && myPlayer.Credits>0);
-        if (myPlayer.Credits == 0) Console.WriteLine("You are dead");
-        else Console.WriteLine("You are out");
-        Console.WriteLine("We are here");
 
+        GameOn(player);
+    }
+
+    private static Player CreatePlayer(int middle)
+    {
+        Console.WriteLine("Enter a nickname:");
+        string nickname = Console.ReadLine();
+
+        return new Player(nickname, 1000, Utils.ChooseCategory(), 0, new Player.Coordinate(middle, middle, middle));
+    }
+
+    private static void GameOn(Player player)
+    {
+        try
+        {
+            while (player.Credits > 0)
+            {
+                Direction direction = player.ChooseDirection();
+                string previousPosition = string.Format("{0},{1},{2}", player.Position.Row, player.Position.Column, player.Position.Depth);
+                string newPosition = null;
+
+                switch (direction)
+                {
+                    case Direction.UP:
+                        newPosition = ProcessDirection(player, player.Position.Row - 1, player.Position.Column, player.Position.Depth);
+                        break;
+                    case Direction.DOWN:
+                        newPosition = ProcessDirection(player, player.Position.Row + 1, player.Position.Column, player.Position.Depth);
+                        break;
+                    case Direction.LEFT:
+                        newPosition = ProcessDirection(player, player.Position.Row, player.Position.Column - 1, player.Position.Depth);
+                        break;
+                    case Direction.RIGHT:
+                        newPosition = ProcessDirection(player, player.Position.Row, player.Position.Column + 1, player.Position.Depth);
+                        break;
+                    case Direction.FORWARD:
+                        newPosition = ProcessDirection(player, player.Position.Row, player.Position.Column, player.Position.Depth - 1);
+                        break;
+                    case Direction.BACKWARD:
+                        newPosition = ProcessDirection(player, player.Position.Row, player.Position.Column, player.Position.Depth + 1);
+                        break;
+                }
+
+                if (newPosition != null)
+                {
+                    previousPosition = newPosition;
+                    Console.WriteLine(newPosition);
+                }
+                else
+                {
+                    Console.WriteLine(previousPosition);
+                }
+            }
+        }
+        catch (IndexOutOfRangeException ioore)
+        {
+            Console.WriteLine(ioore.Message);
+            Console.WriteLine("Congrats you escaped!");
+        }
+    }
+
+    private static string ProcessDirection(Player player, int row, int column, int depth)
+    {
+        string position = null;
+        if (IsDirectionPassable(row, column, depth) && Utils.DisplayChallenge(challenges))
+        {
+            position = string.Format("{0},{1},{2}", row, column, depth);
+            if (!player.IsVisited(position))
+            {
+                player.MarkVisited(position);
+                player.Credits--;
+            }
+            player.Position = new Player.Coordinate(row, column, depth);
+        }
+
+        return position;
+    }
+
+    private static bool IsDirectionPassable(int row, int column, int depth)
+    {
+        return labyrinth[row, column, depth] == 1 ? true : false;
     }
 }
