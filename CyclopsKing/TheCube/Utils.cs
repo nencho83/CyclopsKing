@@ -66,7 +66,45 @@ class Utils
 
         return theCube;
     }
-   
+    public static bool DisplayChallenge(List<Challenge> questions)
+    {
+        Random r = new Random();
+        int rInt = r.Next(0, questions.Count);
+        while (questions[rInt].IsAnswered == true)
+        {
+            r = new Random();
+            rInt = r.Next(0, questions.Count);
+        }
+        Challenge currChallenge = questions[rInt];
+        Console.WriteLine(currChallenge.Question);
+        Console.WriteLine("Please enter the number of the current answer:");
+        Console.WriteLine("1." + currChallenge.Answers[0]);
+        Console.WriteLine("2." + currChallenge.Answers[0]);
+        Console.WriteLine("3." + currChallenge.Answers[0]);
+        int i = 30;
+
+        //while ( !Console.KeyAvailable)
+        //{
+        //    Console.SetCursorPosition(30, 35);
+        //    Console.Write("  ");
+        //    Console.SetCursorPosition(30, 35);
+        //    Console.Write("Time: {0}", i);
+        //    Thread.Sleep(1000);
+        //    i--;
+        //}
+        System.ConsoleKeyInfo key = Console.ReadKey(true);
+        int selection = 0;
+        if (key.Key == ConsoleKey.D1 || key.Key == ConsoleKey.NumPad1) selection = 1;
+        else if (key.Key == ConsoleKey.D2 || key.Key == ConsoleKey.NumPad2) selection = 2;
+        else if (key.Key == ConsoleKey.D3 || key.Key == ConsoleKey.NumPad3) selection = 3;
+
+        if (currChallenge.CorrectAnswer == currChallenge.Answers[selection - 1])
+        {
+            return true;
+            questions[rInt].IsAnswered = true;
+        }
+        else return false;
+    }
     public static void SaveLabyrinthStructure(int[, ,] labyrinth)
     {
         StringBuilder labyrinthToSave = new StringBuilder();
@@ -106,12 +144,14 @@ class Utils
         int severity = int.Parse(line[0]);
         string question = line[1];
         string correctAnswer = line[2];
+        string rightAnswer = line[2];
         string[] answers = new string[3];
         Array.Copy(line, 3, answers, 0, 3);
 
-        return new Challenge(severity, question, correctAnswer, answers);
+        //  return new Challenge(severity, question, correctAnswer, answers);
+        return new Challenge();
     }
-   
+
     public static void ShowScoreboardOnVictory()
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -121,52 +161,21 @@ class Utils
         Console.WriteLine();
         Console.WriteLine(Utils.ReadFromCSV(@".\..\..\Score.csv"));
     }
-    public static bool DisplayChallenge(List<Challenge> questions)
-    {
-        Random generator = new Random();
-        int index = generator.Next(questions.Count);
-        while (questions[index].IsAnswered)
-        {
-            index = generator.Next(questions.Count);
-        }
-
-        Challenge challenge = questions[index];
-        Console.WriteLine(challenge.Question);
-        Console.WriteLine("Please enter the number of the current answer:");
-        Console.WriteLine("1." + challenge.Answers[0]);
-        Console.WriteLine("2." + challenge.Answers[1]);
-        Console.WriteLine("3." + challenge.Answers[2]);
-
-        int selection = 0;
-        System.ConsoleKeyInfo key = Console.ReadKey(true);
-        if (key.Key == ConsoleKey.D1 || key.Key == ConsoleKey.NumPad1) selection = 1;
-        else if (key.Key == ConsoleKey.D2 || key.Key == ConsoleKey.NumPad2) selection = 2;
-        else if (key.Key == ConsoleKey.D3 || key.Key == ConsoleKey.NumPad3) selection = 3;
-
-        if (challenge.CorrectAnswer == challenge.Answers[selection - 1])
-        {
-            questions[index].IsAnswered = true;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+  
     public static void ShowScoresOnGameOver()
     {
-          Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("GAME OVER");
-                    Console.ResetColor();
-                    Console.WriteLine();
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("GAME OVER");
+        Console.ResetColor();
+        Console.WriteLine();
     }
     public static void AddPlayerResultToFile(string nickname, int credits)
     {
         StringBuilder builder = new StringBuilder();
         builder.Append(nickname).Append(", ").Append(credits);
         string playerResult = Convert.ToString(builder);
-        File.AppendAllText(@".\..\..\Score.csv",playerResult + Environment.NewLine);
+        File.AppendAllText(@".\..\..\Score.csv", playerResult + Environment.NewLine);
     }
     public static void WriteToCSV(List<string> lines, string path)
     {
@@ -227,6 +236,7 @@ class Utils
 
         return category;
     }
-   
-  
+
+
 }
+
