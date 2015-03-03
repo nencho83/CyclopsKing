@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.IO;
-using System.Text;
 /// <summary>
 /// 
 /// </summary>
@@ -12,9 +14,9 @@ class TheCube
 
     private static Random generator = new Random();
 
-    public static void Main(String[] args)
+    public static void Main()
     {
-        int cubeSize = 2;
+        int cubeSize = 4;
         labyrinth = Utils.Generate3DLabyrinth(cubeSize);
 
         Utils.SaveLabyrinthStructure(labyrinth);
@@ -33,9 +35,13 @@ class TheCube
                 challenges.Add(challenge);
             }
         }
-
+        string scores = File.ReadAllText(@"..\..\scores.csv");
+        List<string> lines = scores
+                   .Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+                   .ToList();
+        Score.SortScores(lines);
+        Score.WriteToCSV(lines, @"..\..\scores.csv");
         GameOn(player);
-
     }
 
     private static Player CreatePlayer(int middle)
@@ -99,6 +105,7 @@ class TheCube
         {
             Utils.AddPlayerResultToFile(player.Nickname, player.Credits);
             Console.Clear();
+            string result="";
             Utils.ShowScoreboardOnVictory();
         }
     }
