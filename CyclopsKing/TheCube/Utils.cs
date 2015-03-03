@@ -148,7 +148,7 @@ class Utils
         StringBuilder builder = new StringBuilder();
         builder.Append(nickname).Append(", ").Append(credits);
         string playerResult = Convert.ToString(builder);
-        File.AppendAllText(@".\..\..\Scores.csv",playerResult + Environment.NewLine);
+        File.AppendAllText(@".\..\..\Scores.csv", playerResult + Environment.NewLine);
         File.Exists(@".\..\..\Scores.csv");
     }
     public static void WriteToCSV(List<string> lines, string path)

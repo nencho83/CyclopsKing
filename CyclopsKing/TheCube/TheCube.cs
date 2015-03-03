@@ -92,7 +92,7 @@ class TheCube
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("Game over");
+                    Console.WriteLine("GAME OVER");
                     Console.ResetColor();
                     Console.WriteLine();
                 }
