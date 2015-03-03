@@ -65,7 +65,7 @@ class Utils
 
         return theCube;
     }
-
+   
     public static void SaveLabyrinthStructure(int[, ,] labyrinth)
     {
         StringBuilder labyrinthToSave = new StringBuilder();
@@ -110,7 +110,15 @@ class Utils
 
         return new Challenge(severity, question, correctAnswer, answers);
     }
-
+    public static void ShowScoreboardOnVictory()
+    {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine("Congratulations you escaped!");
+        Console.ResetColor();
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine(Utils.ReadFromCSV(@".\..\..\Scores.csv"));
+    }
     public static bool DisplayChallenge(List<Challenge> questions)
     {
         Random generator = new Random();
@@ -143,13 +151,21 @@ class Utils
             return false;
         }
     }
+    public static void ShowScoresOnGameOver()
+    {
+          Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("GAME OVER");
+                    Console.ResetColor();
+                    Console.WriteLine();
+    }
     public static void AddPlayerResultToFile(string nickname, int credits)
     {
         StringBuilder builder = new StringBuilder();
         builder.Append(nickname).Append(", ").Append(credits);
         string playerResult = Convert.ToString(builder);
         File.AppendAllText(@".\..\..\Scores.csv", playerResult + Environment.NewLine);
-        File.Exists(@".\..\..\Scores.csv");
+    
     }
     public static void WriteToCSV(List<string> lines, string path)
     {

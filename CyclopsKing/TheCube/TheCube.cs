@@ -14,7 +14,7 @@ class TheCube
 
     public static void Main(String[] args)
     {
-        int cubeSize = 4;
+        int cubeSize = 2;
         labyrinth = Utils.Generate3DLabyrinth(cubeSize);
 
         Utils.SaveLabyrinthStructure(labyrinth);
@@ -35,9 +35,9 @@ class TheCube
         }
 
         GameOn(player);
-      
+
     }
-    
+
     private static Player CreatePlayer(int middle)
     {
         Console.WriteLine("Enter a nickname:");
@@ -77,7 +77,7 @@ class TheCube
                         newPosition = ProcessDirection(player, player.Position.Row, player.Position.Column, player.Position.Depth + 1);
                         break;
                 }
-                
+
                 if (newPosition != null)
                 {
                     previousPosition = newPosition;
@@ -90,11 +90,7 @@ class TheCube
                 Utils.Credits(player.Credits);
                 if (player.Credits == 0)
                 {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("GAME OVER");
-                    Console.ResetColor();
-                    Console.WriteLine();
+                    Utils.ShowScoresOnGameOver();
                 }
             }
         }
@@ -103,11 +99,7 @@ class TheCube
         {
             Utils.AddPlayerResultToFile(player.Nickname, player.Credits);
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Congratulations you escaped!");
-            Console.ResetColor();
-            Console.WriteLine();
-
+            Utils.ShowScoreboardOnVictory();
         }
     }
 
@@ -131,12 +123,7 @@ class TheCube
         {
             player.Credits--;
             Console.WriteLine("You hit a Wall! Try again!");
-           
-
-
         }
-
-
         return position;
     }
 
