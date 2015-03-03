@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.IO;
+using System.Text.RegularExpressions;
 /// <summary>
 /// 
 /// </summary>
@@ -225,5 +226,43 @@ class Utils
         Console.Clear();
 
         return category;
+    }
+    public static void SortScores()
+    {
+        string read=File.ReadAllText(@"..\..\Scores.csv");
+        var scores = read.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+        for (int i = 0; i < scores.Length - 1; i++)
+        {
+            int bestIndex = i;
+            int bestScore = int.Parse(Regex.Match(scores[i], @"\d+").Value);
+          
+            for (int j = i + 1; j < scores.Length; j++)
+            {
+                int currentScore = int.Parse(Regex.Match(scores[j], @"\d+").Value);
+                if (bestScore < currentScore)
+                {
+                    // Swap elements
+                    string temporary = String.Copy(scores[j]);
+                    scores[j] = scores[bestIndex];
+                    scores[bestIndex] = temporary;
+                }
+            }
+        }
+
+        WriteToCSV(scores, @"..\..\Scores.csv");
+    }
+    public static void WriteToCSV(string[] lines, string path)
+    {
+        StreamWriter writer = new StreamWriter(@path);
+        using (writer)
+        {
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (i < lines.Length - 1)
+                    writer.WriteLine(lines[i]);
+                else
+                    writer.Write(lines[i]);
+            }
+        }
     }
 }
