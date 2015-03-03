@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Linq;
 /// <summary>
 /// 
 /// </summary>
 public  class Score
 {
-    public static void SortScores(List<string> linesList)
+    public static List<string> SortScores(List<string> linesList)
     {
-        
-       
         for (int i = 0; i < linesList.Count - 1; i++)
         {
             int bestIndex = i;
@@ -27,12 +26,8 @@ public  class Score
                     linesList[bestIndex] = temporary;
                 }
             }
-         }
-
-        for (int i = 0; i < linesList.Count; i++)
-        {
-            File.AppendAllText(linesList[i],@".\..\..\Score.csv");
         }
+        return linesList;
+
     }
-       
 }

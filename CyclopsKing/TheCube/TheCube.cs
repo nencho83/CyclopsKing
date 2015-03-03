@@ -36,12 +36,6 @@ class TheCube
                     challenges.Add(challenge);
                 }
             }
-
-            string scores = File.ReadAllText(@"..\..\scores.csv");
-            List<string> lines = scores
-                       .Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
-                       .ToList();
-            Score.SortScores(lines);
         
         GameOn(player);
 
@@ -107,8 +101,15 @@ class TheCube
 
         catch (IndexOutOfRangeException)
         {
-            Utils.AddPlayerResultToFile(player.Nickname, player.Credits);
+           
             Console.Clear();
+            Utils.AddPlayerResultToFile(player.Nickname, player.Credits);
+
+            // Sort highscore list
+            List<string> highscoreList = Utils.ReadFromCSV(@"..\..\scores.csv");
+            highscoreList = Score.SortScores(highscoreList);
+            Utils.WriteToCSV(highscoreList, @"..\..\scores.csv");
+
             Utils.ShowScoreboardOnVictory();
         }
 
@@ -134,6 +135,7 @@ class TheCube
         {
             player.Credits--;
             Console.WriteLine("You hit a Wall! Try again!");
+
         }
         return position;
     }

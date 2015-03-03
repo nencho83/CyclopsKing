@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Linq;
 /// <summary>
 /// 
 /// </summary>
@@ -66,6 +67,21 @@ class Utils
 
         return theCube;
     }
+    public static List<string> ReadFromCSV(string path)
+    {
+        var lines = new List<string>();
+        using (var reader = new StreamReader(@path))
+        {
+            string line = reader.ReadLine();
+            while (line != null)
+            {
+                lines.Add(line);
+
+                line = reader.ReadLine();
+            }
+        }
+        return lines;
+    }
     public static bool DisplayChallenge(List<Challenge> questions)
     {
         Random r = new Random();
@@ -105,6 +121,16 @@ class Utils
         }
         else return false;
     }
+    public static void WriteToCSV(List<string> lines)
+    {
+        StreamWriter stream = new StreamWriter(@".\..\..\Scores.csv");
+        stream.Flush();
+        stream.Close();
+        for (int i = 0; i < lines.Count; i++)
+        {
+            File.AppendAllText(@".\..\..\Scores.csv", lines[i] + Environment.NewLine);
+        }
+    }
     public static void SaveLabyrinthStructure(int[, ,] labyrinth)
     {
         StringBuilder labyrinthToSave = new StringBuilder();
@@ -129,10 +155,9 @@ class Utils
         }
     }
 
-    public static string ReadFromCSV(string path)
-    {
-        return File.ReadAllText(@path);
-    }
+   
+       
+     
     public static void Credits(int credits)
     {
         Console.ForegroundColor = ConsoleColor.Cyan;
