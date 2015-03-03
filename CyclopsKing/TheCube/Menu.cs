@@ -6,7 +6,7 @@ using System.IO;
 sealed class Menu : IMenu
 {
     private const string INSTRUCTIONS = @".\..\..\Instructions.txt";
-    private const string HIGHSCORES = @".\..\..\Test.csv";
+    private const string HIGHSCORES = @".\..\..\Scores.csv";
 
     public void DisplayMenu()
     {
