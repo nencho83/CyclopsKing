@@ -24,14 +24,14 @@ class Utils
             direction = generator.Next(6);
             switch (direction)
             {
-                case 0: column--;   break; // left
-                case 1: column++;   break; // right
-                case 2: depth--;    break; // forward
-                case 3: depth++;    break; // backward
-                case 4: row--;      break; // up
-                case 5: row++;      break; // down
+                case 0: column--; break; // left
+                case 1: column++; break; // right
+                case 2: depth--; break; // forward
+                case 3: depth++; break; // backward
+                case 4: row--; break; // up
+                case 5: row++; break; // down
 
-                default:            break;
+                default: break;
             }
 
             if (passableCells.Count < passableCellsCount &&
@@ -47,12 +47,12 @@ class Utils
             }
 
             count = 0;
-            if (row + 1 < cubeSize && theCube[row + 1, column, depth] == 1)     count++;
-            if (row - 1 >= 0 && theCube[row - 1, column, depth] == 1)           count++;
-            if (column + 1 < cubeSize && theCube[row, column + 1, depth] == 1)  count++;
-            if (column - 1 >= 0 && theCube[row, column - 1, depth] == 1)        count++;
-            if (depth + 1 < cubeSize && theCube[row, column, depth + 1] == 1)   count++;
-            if (depth - 1 >= 0 && theCube[row, column, depth - 1] == 1)         count++;
+            if (row + 1 < cubeSize && theCube[row + 1, column, depth] == 1) count++;
+            if (row - 1 >= 0 && theCube[row - 1, column, depth] == 1) count++;
+            if (column + 1 < cubeSize && theCube[row, column + 1, depth] == 1) count++;
+            if (column - 1 >= 0 && theCube[row, column - 1, depth] == 1) count++;
+            if (depth + 1 < cubeSize && theCube[row, column, depth + 1] == 1) count++;
+            if (depth - 1 >= 0 && theCube[row, column, depth - 1] == 1) count++;
             if (count > 3) continue;
 
             String position = row + "," + column + "," + depth;
@@ -94,7 +94,12 @@ class Utils
     {
         return File.ReadAllText(@path);
     }
-
+    public static void Credits(int credits)
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine("Credits left: {0}", credits);
+        Console.ResetColor();
+    }
     public static Challenge ExtractChallenge(string[] line)
     {
         int severity = int.Parse(line[0]);
@@ -124,7 +129,7 @@ class Utils
 
         int selection = 0;
         System.ConsoleKeyInfo key = Console.ReadKey(true);
-        if (key.Key == ConsoleKey.D1 || key.Key == ConsoleKey.NumPad1)      selection = 1;
+        if (key.Key == ConsoleKey.D1 || key.Key == ConsoleKey.NumPad1) selection = 1;
         else if (key.Key == ConsoleKey.D2 || key.Key == ConsoleKey.NumPad2) selection = 2;
         else if (key.Key == ConsoleKey.D3 || key.Key == ConsoleKey.NumPad3) selection = 3;
 
@@ -138,7 +143,14 @@ class Utils
             return false;
         }
     }
-
+    public static void AddPlayerResultToFile(string nickname, int credits)
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.Append(nickname).Append(", ").Append(credits);
+        string playerResult = Convert.ToString(builder);
+        File.AppendAllText(@".\..\..\Scores.csv",playerResult + Environment.NewLine);
+        File.Exists(@".\..\..\Scores.csv");
+    }
     public static void WriteToCSV(List<string> lines, string path)
     {
         using (StreamWriter writer = new StreamWriter(@path))
@@ -190,11 +202,10 @@ class Utils
 
         switch (choice)
         {
-            case 1: category = Category.IT;         break;
-            case 2: category = Category.Movie;      break;
-            case 3: category = Category.Science;    break;
+            case 1: category = Category.IT; break;
+            case 2: category = Category.Movie; break;
+            case 3: category = Category.Science; break;
         }
-
         Console.Clear();
 
         return category;

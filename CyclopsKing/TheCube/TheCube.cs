@@ -14,7 +14,7 @@ class TheCube
 
     public static void Main(String[] args)
     {
-        int cubeSize = 9;
+        int cubeSize = 4;
         labyrinth = Utils.Generate3DLabyrinth(cubeSize);
 
         Utils.SaveLabyrinthStructure(labyrinth);
@@ -35,14 +35,15 @@ class TheCube
         }
 
         GameOn(player);
+      
     }
-
+    
     private static Player CreatePlayer(int middle)
     {
         Console.WriteLine("Enter a nickname:");
         string nickname = Console.ReadLine();
 
-        return new Player(nickname, 1000, Utils.ChooseCategory(), 0, new Player.Coordinate(middle, middle, middle));
+        return new Player(nickname, 10, Utils.ChooseCategory(), 0, new Player.Coordinate(middle, middle, middle));
     }
 
     private static void GameOn(Player player)
@@ -76,7 +77,7 @@ class TheCube
                         newPosition = ProcessDirection(player, player.Position.Row, player.Position.Column, player.Position.Depth + 1);
                         break;
                 }
-
+                
                 if (newPosition != null)
                 {
                     previousPosition = newPosition;
@@ -86,12 +87,27 @@ class TheCube
                 {
                     Console.WriteLine(previousPosition);
                 }
+                Utils.Credits(player.Credits);
+                if (player.Credits == 0)
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("Game over");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                }
             }
         }
-        catch (IndexOutOfRangeException ioore)
+
+        catch (IndexOutOfRangeException)
         {
-            Console.WriteLine(ioore.Message);
-            Console.WriteLine("Congrats you escaped!");
+            Utils.AddPlayerResultToFile(player.Nickname, player.Credits);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Congratulations you escaped!");
+            Console.ResetColor();
+            Console.WriteLine();
+
         }
     }
 
@@ -113,7 +129,11 @@ class TheCube
         }
         else
         {
+            player.Credits--;
             Console.WriteLine("You hit a Wall! Try again!");
+           
+
+
         }
 
 
