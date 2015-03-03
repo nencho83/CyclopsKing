@@ -9,7 +9,8 @@ public  class Score
 {
     public static void SortScores(List<string> linesList)
     {
-
+        
+       
         for (int i = 0; i < linesList.Count - 1; i++)
         {
             int bestIndex = i;
@@ -27,32 +28,11 @@ public  class Score
                 }
             }
          }
-         StreamWriter writer = new StreamWriter(@"..\..\scores.csv");
-            using (writer)
-            {
-                for (int i = 0; i <linesList.Count; i++)
-                {
-                    if (i < linesList.Count - 1)
-                        writer.WriteLine(linesList[i]);
-                    else
-                        writer.Write(linesList[i]);
-                }
-            }
-            writer.Close();
-    
-    }
-        public static void WriteToCSV(List<string> lines, string path)
+
+        for (int i = 0; i < linesList.Count; i++)
         {
-            StreamWriter writer = new StreamWriter(@path);
-            using (writer)
-            {
-                for (int i = 0; i <lines.Count; i++)
-                {
-                    if (i < lines.Count - 1)
-                        writer.WriteLine(lines[i]);
-                    else
-                        writer.Write(lines[i]);
-                }
-            }
+            File.AppendAllText(linesList[i],@".\..\..\Score.csv");
         }
+    }
+       
 }

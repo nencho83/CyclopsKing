@@ -111,6 +111,7 @@ class Utils
 
         return new Challenge(severity, question, correctAnswer, answers);
     }
+   
     public static void ShowScoreboardOnVictory()
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -118,7 +119,7 @@ class Utils
         Console.ResetColor();
         Console.WriteLine();
         Console.WriteLine();
-        Console.WriteLine(Utils.ReadFromCSV(@".\..\..\Scores.csv"));
+        Console.WriteLine(Utils.ReadFromCSV(@".\..\..\Score.csv"));
     }
     public static bool DisplayChallenge(List<Challenge> questions)
     {
@@ -165,8 +166,7 @@ class Utils
         StringBuilder builder = new StringBuilder();
         builder.Append(nickname).Append(", ").Append(credits);
         string playerResult = Convert.ToString(builder);
-        File.AppendAllText(@".\..\..\Scores.csv", playerResult + Environment.NewLine);
-    
+        File.AppendAllText(@".\..\..\Score.csv",playerResult + Environment.NewLine);
     }
     public static void WriteToCSV(List<string> lines, string path)
     {
@@ -227,42 +227,6 @@ class Utils
 
         return category;
     }
-    public static void SortScores()
-    {
-        string read=File.ReadAllText(@"..\..\Scores.csv");
-        var scores = read.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
-        for (int i = 0; i < scores.Length - 1; i++)
-        {
-            int bestIndex = i;
-            int bestScore = int.Parse(Regex.Match(scores[i], @"\d+").Value);
-          
-            for (int j = i + 1; j < scores.Length; j++)
-            {
-                int currentScore = int.Parse(Regex.Match(scores[j], @"\d+").Value);
-                if (bestScore < currentScore)
-                {
-                    // Swap elements
-                    string temporary = String.Copy(scores[j]);
-                    scores[j] = scores[bestIndex];
-                    scores[bestIndex] = temporary;
-                }
-            }
-        }
-
-        WriteToCSV(scores, @"..\..\Scores.csv");
-    }
-    public static void WriteToCSV(string[] lines, string path)
-    {
-        StreamWriter writer = new StreamWriter(@path);
-        using (writer)
-        {
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if (i < lines.Length - 1)
-                    writer.WriteLine(lines[i]);
-                else
-                    writer.Write(lines[i]);
-            }
-        }
-    }
+   
+  
 }

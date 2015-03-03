@@ -16,32 +16,36 @@ class TheCube
 
     public static void Main()
     {
-        int cubeSize = 4;
-        labyrinth = Utils.Generate3DLabyrinth(cubeSize);
+       
+            int cubeSize = 2;
+            labyrinth = Utils.Generate3DLabyrinth(cubeSize);
 
-        Utils.SaveLabyrinthStructure(labyrinth);
+            Utils.SaveLabyrinthStructure(labyrinth);
 
-        Menu menu = new Menu();
-        menu.DisplayMenu();
+            Menu menu = new Menu();
+            menu.DisplayMenu();
 
-        Player player = CreatePlayer(cubeSize / 2);
+            Player player = CreatePlayer(cubeSize / 2);
 
-        string line;
-        using (StreamReader reader = new StreamReader(@".\..\..\" + player.Category + "_Questions.csv"))
-        {
-            while ((line = reader.ReadLine()) != null)
+            string line;
+            using (StreamReader reader = new StreamReader(@".\..\..\" + player.Category + "_Questions.csv"))
             {
-                Challenge challenge = Utils.ExtractChallenge(line.Split('|'));
-                challenges.Add(challenge);
+                while ((line = reader.ReadLine()) != null)
+                {
+                    Challenge challenge = Utils.ExtractChallenge(line.Split('|'));
+                    challenges.Add(challenge);
+                }
             }
-        }
-        string scores = File.ReadAllText(@"..\..\scores.csv");
-        List<string> lines = scores
-                   .Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
-                   .ToList();
-        Score.SortScores(lines);
-        Score.WriteToCSV(lines, @"..\..\scores.csv");
+
+            string scores = File.ReadAllText(@"..\..\scores.csv");
+            List<string> lines = scores
+                       .Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+                       .ToList();
+            Score.SortScores(lines);
+        
         GameOn(player);
+
+        
     }
 
     private static Player CreatePlayer(int middle)
@@ -105,9 +109,9 @@ class TheCube
         {
             Utils.AddPlayerResultToFile(player.Nickname, player.Credits);
             Console.Clear();
-            string result="";
             Utils.ShowScoreboardOnVictory();
         }
+
     }
 
     private static string ProcessDirection(Player player, int row, int column, int depth)
