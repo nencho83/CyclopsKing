@@ -1,0 +1,30 @@
+IT Knowledge ;1; What is the name of the flashing symbol on the computer screen that shows where the information you enter will appear?; Chip;Circuit;Cursor;Cursor
+IT Knowledge ;1; What is the name for any computer program that performs a specific task separate from the computer operating system that runs programs?; Disk;Software;Operating system;Software
+IT Knowledge ;1; What is the area inside the computer that allows the computer to store and/or act on information coded in binary code?; Byte;Circuit;Memory;Memory
+IT Knowledge ;1;What is the mechanism that holds, spins, and reads the information on a disk?;Input Device;Disk Drive;CPU;Disk Drive
+IT Knowledge ;1;What is an information storage unit that makes use of digitally coded signals on a coated plastic disk?; Flopy Disk;Memory;CD Rom;CD Rom
+IT Knowledge ;1;What is the primary input device used to enter information and instructions into the computer?; Mouse;Keyboard;Printer; Keyboard
+IT Knowledge ;1;What is the hand-held device used as a pointing and/or drawing instrument?;Byte;Keyboard;Mouse;Mouse
+IT Knowledge ;1;What is the front part of a monitor where information is displayed?;Screen;Computer;Memory;Screen
+IT Knowledge ;1; What is a reusable information storage device made of a floppy piece of plastic inside a hard plastic protector?;Hardware;Floppy disk;Microprocesor;Floppy disk
+IT Knowledge ;1;What is the permanently installed mechanism inside the computer that stores all data that is put into the computer, even after the computer is turned off?; Ram;HDD;Hardware;HDD
+IT Knowledge ;2;What type of software is used for the creation of letters, papers, and other documents?;Database;Word Processor;Spreadsheet;Word Processor
+IT Knowledge ;2; What is any piece of computer hardware that displays output after the computer has processed the data or information that has been input?;Output device;Microprocessor;Motherboard;Output device
+IT Knowledge ;2;What is a large collection of data stored in a computer? You might use this type of program to keep a record of all the friends in your address book.;Information Processing;Document;Database;Database
+IT Knowledge ;2;What is a single binary digit, 0 or 1? It is the smallest unit of data that a computer can process.;Bit;Byte;Chip;Bit
+IT Knowledge ;2; What means to capture, store, update, and retrieve data and information? A computer is this type of machine.;Information Processing;Microprocessor;Operating System;Information Processing
+IT Knowledge ;2;What do we call a computer program that organizes data in rows and columns of cells?;Spreadsheet program;Database program;Word Processor program;Spreadsheet program
+IT Knowledge ;2;What are the numbers made up of 0's and 1's? They are used in computers to represent information.;Binary numbers;Megabytes;Kilobytes;Binary numbers
+IT Knowledge ;2; What is the basic software that a computer needs to interpret input from input devices, run programs, and read from or write to hard drives and disks?;Hardward system;Operating system;Information processing;Operating system
+IT Knowledge ;2; What is a tool that finds Web pages in online databases based on terms and criteria specified by the user?;Server;Internet;Search engine;Search engine
+IT Knowledge ;2;What is a set of eight binary digits (bits that are either 0 or 1) that represent a letter, number, or symbol? (01000011);Megabyte;Bit;Byte;Byte
+IT Knowledge ;3; What is part of a database that holds only one type of information?;Report;Field;Record;Field
+IT Knowledge ;3; What is another name for the microprocessor, the main processing unit of the computer?;Circuit;Chip;CPU;CPU
+IT Knowledge ;3; What do we call a collection of two or more computers that are located within a limited distance of each other and that are connected to each other directly or indirectly?;Network;Internet;LAN (Local Area Network);LAN (Local Area Network)
+IT Knowledge ;3; What is part of a database that holds all of the information about one item or subject?;Record;File;Chart;Record
+IT Knowledge ;3;What is a networked computer that is shared by multiple users?;Modem;Network; Server; Server
+IT Knowledge ;3;What do we call anything created with a software program that is stored in a computer?;Document;Field;Record;Document
+IT Knowledge ;3;What word means to copy or send a file from a local computer to another computer on the Internet?; Login;Upload;Server;Upload
+IT Knowledge ;3; What is the personal computer operating system that organizes files within a computer and uses a graphic desktop environment?;Functions;Windows;DOS (Disk Operating System);Windows
+IT Knowledge ;3;What is the temporary storage memory chips that form the computer's primary work space? The contents are lost if power is disrupted.; RAM (Random-access memory);ROM (Read-only memory);Hard drive memory;RAM (Random-access memory)
+IT Knowledge ;3;What is the term for a computer program, usually produced and used maliciously, that can destroy or damage computer information?;Bug;Byte;Virus;Virus
