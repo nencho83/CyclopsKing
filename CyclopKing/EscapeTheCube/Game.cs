@@ -259,7 +259,8 @@ public class Game
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine("---------------------------------");
-        Console.WriteLine(string.Format("current position: {0},{1},{2}", player.Position.Row, player.Position.Column, player.Position.Depth));
+        string position = string.Format("{0},{1},{2}", player.Position.Row, player.Position.Column, player.Position.Depth);
+        Console.WriteLine("current position: {0}", player.IsVisited(position) ? position + " - visited" : position);
         Console.WriteLine(string.Format("credits left: {0}", player.Credits));
         Console.WriteLine("---------------------------------");
         Console.ForegroundColor = ConsoleColor.Gray;

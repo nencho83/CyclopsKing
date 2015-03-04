@@ -62,6 +62,8 @@ public class Player
         while (isInvalidCommand)
         {
             isInvalidCommand = false;
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
             switch (Console.ReadLine().ToLower())
             {
                 case "up": cmd = Direction.UP; break;
@@ -78,6 +80,7 @@ public class Player
                     isInvalidCommand = true;
                     break;
             }
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
 
         return cmd;
