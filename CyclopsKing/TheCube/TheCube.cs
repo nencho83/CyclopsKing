@@ -17,7 +17,7 @@ class TheCube
     public static void Main()
     {
        
-            int cubeSize = 2;
+            int cubeSize = 5;
             labyrinth = Utils.Generate3DLabyrinth(cubeSize);
 
             Utils.SaveLabyrinthStructure(labyrinth);
