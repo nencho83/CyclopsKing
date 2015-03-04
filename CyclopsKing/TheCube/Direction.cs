@@ -9,5 +9,6 @@ public enum Direction
     UP,
     DOWN,
     FORWARD,
-    BACKWARD
+    BACKWARD,
+    ESCAPE
 }

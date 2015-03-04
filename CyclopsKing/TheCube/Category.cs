@@ -4,7 +4,7 @@
 /// </summary>
 public enum Category
 {
-    IT, 
-    Movie, 
+    IT,
+    Movie,
     Science
 }

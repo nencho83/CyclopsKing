@@ -1,87 +1,52 @@
 ﻿using System;
-using System.IO;
-/// <summary>
-/// 
-/// </summary>
-sealed class Menu : IMenu
+using System.Text;
+
+public class Menu
 {
-    private const string INSTRUCTIONS = @".\..\..\Instructions.txt";
-    private const string HIGHSCORES = @".\..\..\Scores.csv";
+    private bool isShown;
+    private string[] options;
+    private StringBuilder menu = new StringBuilder();
 
-    public void DisplayMenu()
+    public Menu(string[] options)
     {
-        Console.Clear();
-        string[] options = { "Start Game", "Instructions", "High Scores", "Exit" };
-        int selectedOption = 0;
-
-        while (true)
-        {
-            PrintMenu(options, selectedOption);
-
-            ConsoleKeyInfo pressedKey = Console.ReadKey();
-            if (pressedKey.Key == ConsoleKey.DownArrow)
-            {
-                if (selectedOption == options.Length - 1) selectedOption = 0;
-                else selectedOption++;
-            }
-            else if (pressedKey.Key == ConsoleKey.UpArrow)
-            {
-                if (selectedOption == 0) selectedOption = options.Length - 1;
-                else selectedOption--;
-            }
-            else if (pressedKey.Key == ConsoleKey.Enter)
-            {
-                Console.Clear();
-
-                switch (selectedOption)
-                {
-                    case 0: //StartGame;
-                        return;
-                    case 1: //Instructions;
-                        string instructions = Utils.ReadFromCSV(INSTRUCTIONS);
-                        Console.WriteLine(instructions);
-                        EscapeKeyPressed();
-                        break;
-                    case 2: //Highscores;
-                        string scores = Utils.ReadFromCSV(HIGHSCORES);
-                        Console.WriteLine(scores);
-                        EscapeKeyPressed();
-                        break;
-                    case 3: //Exit
-                        System.Environment.Exit(0);
-                        break;
-                }
-            }
-        }
+        this.isShown = false;
+        this.options = options;
     }
 
-    private void PrintMenu(string[] options, int selectedOption)
+    public bool IsShown
     {
+        get { return this.isShown; }
+        set { this.isShown = value; }
+    }
+
+    public void Show(int selectedOption)
+    {
+        this.isShown = true;
         Console.CursorVisible = false;
         Console.Clear();
-        int leftOffSet = (Console.WindowWidth / 2);
-        int topOffSet = (Console.WindowHeight / 2);
+        int leftOffSet = (Console.WindowWidth / 2) + 3;
+        int topOffSet = (Console.WindowHeight / 2) - 2;
         Console.SetCursorPosition(0, topOffSet);
 
-        Console.WriteLine(String.Format("{0," + leftOffSet + "}", options[0]));
-        Console.WriteLine(String.Format("{0," + leftOffSet + "}", options[1]));
-        Console.WriteLine(String.Format("{0," + leftOffSet + "}", options[2]));
-        Console.WriteLine(String.Format("{0," + leftOffSet + "}", options[3]));
+        foreach (var option in options)
+        {
+            Console.WriteLine(String.Format("{0," + leftOffSet + "}", option));
+        }
 
         Console.SetCursorPosition(0, Console.CursorTop - (options.Length - selectedOption));
-        Console.ForegroundColor = ConsoleColor.Red;
+        Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("{0," + leftOffSet + "}", options[selectedOption]);
         Console.ForegroundColor = ConsoleColor.Gray;
     }
 
-    private static void EscapeKeyPressed()
+    public void Hide()
     {
-        Console.ForegroundColor = ConsoleColor.Black;
-        while (Console.ReadKey().Key != ConsoleKey.Escape)
-        {
-            Console.CursorLeft = 0;
-        }
-        Console.ForegroundColor = ConsoleColor.Gray;
+        this.isShown = false;
+        Console.Clear();
+    }
+
+    public int OptionCount()
+    {
+        return this.options.Length;
     }
 }
-

@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 /// <summary>
 /// 
 /// </summary>
-public class Player : IPlayer
+public class Player
 {
     private string nickname;
     private int credits;
@@ -56,7 +56,7 @@ public class Player : IPlayer
     public Direction ChooseDirection()
     {
         Direction cmd = Direction.UP;
-        Console.WriteLine("Enter a direction:");
+        Console.WriteLine("Enter a direction from [up, down, left, right, forward, backward]: ");
 
         bool isInvalidCommand = true;
         while (isInvalidCommand)
@@ -72,7 +72,9 @@ public class Player : IPlayer
                 case "backward": cmd = Direction.BACKWARD; break;
 
                 default:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("There is no such direction! Please choose valid direction:");
+                Console.ForegroundColor = ConsoleColor.Gray;
                     isInvalidCommand = true;
                     break;
             }

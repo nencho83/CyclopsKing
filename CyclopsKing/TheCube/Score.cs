@@ -6,28 +6,24 @@ using System.Linq;
 /// <summary>
 /// 
 /// </summary>
-public  class Score
+public class Score
 {
-    public static List<string> SortScores(List<string> linesList)
+    private string playerName;
+    private int playerScore;
+
+    public Score(string playerName, int playerScore)
     {
-        for (int i = 0; i < linesList.Count - 1; i++)
-        {
-            int bestIndex = i;
-            int bestScore = int.Parse(Regex.Match(linesList[i], @"\d+").Value);
+        this.playerName = playerName;
+        this.playerScore = playerScore;
+    }
 
-            for (int j = i + 1; j < linesList.Count; j++)
-            {
-                int currentScore = int.Parse(Regex.Match(linesList[j], @"\d+").Value);
-                if (bestScore < currentScore)
-                {
-                    // Swap elements
-                    string temporary = String.Copy(linesList[j]);
-                    linesList[j] = linesList[bestIndex];
-                    linesList[bestIndex] = temporary;
-                }
-            }
-        }
-        return linesList;
+    public int PlayerScore
+    {
+        get { return this.playerScore; }
+    }
 
+    public string PlayerName
+    {
+        get { return this.playerName; }
     }
 }
