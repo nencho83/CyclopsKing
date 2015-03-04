@@ -106,7 +106,10 @@ class TheCube
             Utils.AddPlayerResultToFile(player.Nickname, player.Credits);
 
             // Sort highscore list
-            List<string> highscoreList = Utils.ReadFromCSV(@"..\..\scores.csv");
+            List<string> highscoreList = Utils.ReadFromCSV(@"..\..\scores.csv")
+                .Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+                .ToList();
+
             highscoreList = Score.SortScores(highscoreList);
             Utils.WriteToCSV(highscoreList, @"..\..\scores.csv");
 

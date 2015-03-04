@@ -67,6 +67,11 @@ class Utils
 
         return theCube;
     }
+    public static string ReadFromCSV(string path)
+    {
+        return File.ReadAllText(@path);
+    }
+    /*
     public static List<string> ReadFromCSV(string path)
     {
         var lines = new List<string>();
@@ -82,6 +87,7 @@ class Utils
         }
         return lines;
     }
+    */
     public static bool DisplayChallenge(List<Challenge> questions)
     {
         Random r = new Random();
