@@ -27,7 +27,7 @@ The method PrintMenu() visualizes 4 options in the console. The Menu is implemen
 **1 one-dimensional** array that lists the main functionality of the game. The player can navigate and choose options from the Menu.
 
 ### 2. Cube generation
-The Cube is built using **1 three-dimensional** array with size 3x3x3. A random generator creates a path with exit, and when the game starts the player is positioned in the middle of the cube.
+The Cube is built using **1 three-dimensional** array with size size 5x5x5. A random generator creates a path with exit, and when the game starts the player is positioned in the middle of the cube.
 
 ### 3. Player
 The Player class handles information about the player, his coordinates in the cube, the selected category of questions and his score.
